@@ -1,0 +1,1 @@
+<template>Publications page</template>

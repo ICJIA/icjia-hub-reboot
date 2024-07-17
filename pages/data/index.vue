@@ -1,0 +1,1 @@
+<template>Data page</template>

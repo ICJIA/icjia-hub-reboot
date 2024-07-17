@@ -1,5 +1,8 @@
+
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+
 export default defineNuxtConfig({
+  css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
   build: {
     transpile: ['vuetify'],

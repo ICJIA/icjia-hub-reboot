@@ -1,0 +1,45 @@
+:root {
+  /* --clr-primary-100: hsl(215, 100%, 95%);
+  --clr-primary-300: hsl(215, 100%, 73%); */
+  --clr-primary-light: hsl(206.51, 81.13%, 95%);
+  --clr-primary: hsl(206.51, 81.13%, 20.78%);
+
+  /* --clr-light: hsl(0, 0%, 100%);
+  --clr-light-200: hsl(0, 0%, 90%);
+
+  --clr-dark-400: hsl(0, 0%, 75%);
+  --clr-dark-500: hsl(0, 0%, 55%);
+  --clr-dark-600: hsl(0, 0%, 35%);
+  --clr-dark-800: hsl(216, 100%, 9%);
+  --clr-dark-900: hsl(0, 0%, 0%);
+
+  --ff-primary: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial,
+    'Lucida Grande', sans-serif;
+
+  --ff-body: var(--ff-primary);
+  --ff-heading: var(--ff-primary);
+
+  --fw-regular: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 700;
+
+  --fs-300: 0.875rem;
+  --fs-400: 1rem;
+  --fs-500: 1.125rem;
+  --fs-600: 1.5rem;
+  --fs-700: 2.5rem;
+
+  --fs-body: var(--fs-400);
+  --fs-primary-heading: var(--fs-700);
+  --fs-secondary-heading: var(--fs-600);
+  --fs-nav: var(--fs-400);
+  --fs-button: var(--fs-400);
+
+  --spacing-000: 0rem;
+  --spacing-100: 0.25rem;
+  --spacing-200: 0.5rem;
+  --spacing-300: 1rem;
+  --spacing-400: 1.5rem;
+  --spacing-500: 3rem;
+  --spacing-600: 4.5rem; */
+}
