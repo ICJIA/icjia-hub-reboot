@@ -10,7 +10,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <v-container fluid class="header px-15 pb-15 pt-4">
+  <v-container fluid class="header pa-15">
     <div>
       <h1>ICJIA Research Hub</h1>
       <p class="mt-4">The Research & Analysis Unit serves as Illinois’ Statistical Analysis Center (SAC). State SACs provide objective analysis of criminal justice data for informing statewide policy and practice. The Illinois SAC is affiliated with and supported by the Justice Information Resource Network (JIRN), a national nonprofit organization that promotes collaboration and exchange of information among state SACs, and acts as a liaison between state agencies and the U.S. Department of Justice.
@@ -60,6 +60,7 @@ R&A has taken a leadership role in convening policymakers and practitioners to c
 
 <style scoped>
 .header {
+  margin-top: 72px;
   border-bottom: 10px solid var(--clr-primary);
 }
 

@@ -4,6 +4,7 @@ import { ref, computed } from 'vue'
 import { useDisplay } from 'vuetify'
 
 const route = useRoute()
+const router = useRouter()
 
 const { smAndDown } = useDisplay()
 
@@ -11,39 +12,69 @@ const showNavDrawer = ref(false)
 
 const navItems = {
   overview: {
-    path: 'overview',
+    path: '/overview',
     title: 'Overview',
     items: [
-      'Research Hub Overview',
-      'Research Hub Staff'
+      { path: '/about', title: 'About Research Hub' },
+      { path: '/staff', title: 'Research Hub Staff' }
     ]
   },
   data: {
-    path: 'data',
+    path: '/data',
     title: 'Data & Tools',
     items: [
-      'Data Browser',
-      'Data Snapshots',
-      'Data Sources',
-      'Data Roadmap'
+      {
+        path: '/browser',
+        title: 'Data Browser'
+      },
+      {
+        path: '/snapshots',
+        title: 'Data Snapshots'
+      },
+      {
+        path: '/sources',
+        title: 'Data Sources'
+      },
+      {
+        path: '/roadmap',
+        title: 'Data Roadmap'
+      }
     ]
   },
   publications: {
-    path: 'publications',
+    path: '/publications',
     title: 'Publications',
     items: [
-      'Articles',
-      'Reports',
-      'Interactive Charts'
+      {
+        path: '/articles',
+        title: 'Articles'
+      },
+      {
+        path: '/reports',
+        title: 'Reports'
+      },
+      {
+        path: '/charts',
+        title: 'Interactive Charts'
+      }
     ]
   },
   irb: {
-    path: 'irb',
+    path: '/irb',
     title: 'Institutional Review Board',
     items: [
-      'Members & Staff',
-      'Policies',
-      'Resources'
+    {
+        path: '/members',
+        title: 'Members & Staff'
+      },
+      {
+        path: '/policies',
+        title: 'Policies'
+      },
+      {
+        path: '/resources',
+        title: 'Resources'
+      }
     ]
   }
 }
@@ -72,22 +103,45 @@ const pathItems = computed(() => {
   return items
 })
 
-const breadcrumbsComputed = computed(() => {
-  const breadcrumbs = []
-  for (const pathItem of pathItems.value) {
-    const crumb = {
-      title: navItems[pathItem]?.title ? navItems[pathItem].title : 'Research Hub',
-      disabled: false,
-      href: navItems[pathItem]?.path ? navItems[pathItem].path : '/'
-    }
-    breadcrumbs.push(crumb)
+const showBreadcrumbs = computed(() => {
+  if (route.fullPath === '/') {
+    return false
   }
+  return true
+})
+
+const breadcrumbsComputed = computed(() => {
+  const breadcrumbs = [{ title: 'Research Hub', disabled: false, href: '/' }]
+
+  const rootItem = pathItems.value[0]
+  const rootCrumb = {
+    title: navItems[rootItem].title,
+    disabled: false,
+    href: navItems[rootItem].path
+  }
+  breadcrumbs.push(rootCrumb)
+
+  if (pathItems.value[1]) {
+    const nestedItem =  navItems[rootItem].items.find(subItem => {
+      if (subItem.path.includes(pathItems.value[1])) {
+        return true
+      }
+      return false
+    })
+    const nestedCrumb = {
+      title: nestedItem.title,
+      disabled: false,
+      href: rootCrumb.href + nestedItem.path
+    }
+    breadcrumbs.push(nestedCrumb)
+  }
+  
   return breadcrumbs
 })
 </script>
 
-<template>
-  <v-navigation-drawer v-model="showNavDrawer">
+<template> 
+  <v-navigation-drawer v-model="showNavDrawer" disable-resize-watcher>
     Mobile Nav
   </v-navigation-drawer>
 
@@ -96,8 +150,7 @@ const breadcrumbsComputed = computed(() => {
       <v-app-bar-nav-icon @click="showNavDrawer = !showNavDrawer"></v-app-bar-nav-icon>
     </template>    
     
-    <v-app-bar-title link>Research Hub</v-app-bar-title>
-
+    <v-list-item @click="router.push('/')" title="Research Hub"></v-list-item>
     <v-spacer></v-spacer>
 
     <v-menu
@@ -111,18 +164,18 @@ const breadcrumbsComputed = computed(() => {
 
       <v-list>
         <v-list-item
-          v-for="(subitem, index) in item.items"
-          :key="index"
-          link
+          v-for="(subitem) in item.items"
+          :key="`${item.path}${subitem.path}`"
+          :to="`${item.path}${subitem.path}`"
         >
-          <v-list-item-title>{{ subitem }}</v-list-item-title>
+          <v-list-item-title>{{ subitem.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
   </v-app-bar>
 
-  <v-container class="breadcrumbs-container mx-1">
-    <v-breadcrumbs :items="breadcrumbItems">
+  <v-container v-if="showBreadcrumbs" class="breadcrumbs-container mx-1">
+    <v-breadcrumbs :items="breadcrumbsComputed">
       <template v-slot:divider>
         <v-icon icon="mdi-chevron-right"></v-icon>
       </template>
