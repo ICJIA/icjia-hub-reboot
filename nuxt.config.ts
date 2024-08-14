@@ -2,6 +2,9 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 
 export default defineNuxtConfig({
+  app: {
+    // baseURL: 'https://sudoris.github.io/icjia-hub-reboot/'
+  },
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
   build: {
