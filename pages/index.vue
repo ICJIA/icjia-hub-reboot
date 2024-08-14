@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useDisplay } from 'vuetify'
+import { useRouter } from '#vue-router'
+
+const router = useRouter()
 
 const { smAndDown } = useDisplay()
 
@@ -44,7 +47,7 @@ R&A has taken a leadership role in convening policymakers and practitioners to c
     <div>
       <h1>Data Browser</h1>
       <p class="mt-4">The Data Browser provides interactive views of the criminal justice data available in the ICJIA dataset. Plan a project by exploring the types and quantities of data available.</p>
-      <v-btn size="x-large" flat class="mt-6" color="amber-accent-4">
+      <v-btn size="x-large" flat class="mt-6" color="amber-accent-4" @click="router.push('/data/browser')">
         Browse Data
       </v-btn>
     </div>
