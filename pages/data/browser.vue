@@ -135,10 +135,10 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <div>
-              Description: {{ dataset.attributes.description }}
-            </div> 
-            <br>
+            <!-- <div>
+              Description: {{ dataset.attributes.description.substring(0, 50) }}
+            </div>  
+            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -164,10 +164,10 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <div>
-              Description: {{ dataset.attributes.description }}
-            </div> 
-            <br>
+            <!-- <div>
+              Description: {{ dataset.attributes.description.substring(0, 50) }}
+            </div>  
+            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -193,10 +193,10 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <div>
+            <!-- <div>
               Description: {{ dataset.attributes.description }}
-            </div> 
-            <br>
+            </div>  
+            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -222,10 +222,10 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <div>
+            <!-- <div>
               Description: {{ dataset.attributes.description }}
-            </div> 
-            <br>
+            </div>  
+            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -251,10 +251,10 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <div>
+            <!-- <div>
               Description: {{ dataset.attributes.description }}
-            </div> 
-            <br>
+            </div>  
+            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -280,10 +280,10 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <div>
+            <!-- <div>
               Description: {{ dataset.attributes.description }}
             </div> 
-            <br>
+            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
