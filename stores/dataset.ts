@@ -13,6 +13,7 @@ export const useDatasetStore = defineStore('datasetStore', () => {
   }
 
   return { 
-    loadDatasets
+    datasets,
+    loadDatasets    
   }
 })
