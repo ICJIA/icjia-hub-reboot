@@ -9,7 +9,7 @@ const keyword = ref()
 const searchHint = ref('Data includes 409,420 participants as of 2/15/2023.')
 
 onMounted(async () => {
-  console.log(await datasetStore.listDataset())
+  console.log(await datasetStore.loadDatasets())
 })
 </script>
 

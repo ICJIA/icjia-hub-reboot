@@ -3,17 +3,16 @@ import { defineStore } from 'pinia'
 import api from '@/api/index.js'
 
 export const useDatasetStore = defineStore('datasetStore', () => {
-  const questionnaireResponses = ref([])
-  const listDataset = async () => {         
+  const datasets = ref([])
+  const loadDatasets = async () => {         
     const res = await api.listDataset()
     console.log(res)
-    // if (res.entry && res.entry.length) {
-    //   // questionnaireResponses.value = res.entry.map(item => item.resource)
- 
-    // }
+    if (res.data && res.data.length) {
+      datasets.value = res.data
+    }
   }
 
   return { 
-    listDataset
+    loadDatasets
   }
 })
