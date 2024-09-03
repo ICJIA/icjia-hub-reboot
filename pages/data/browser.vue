@@ -2,6 +2,7 @@
 import { ref, onMounted, computed } from 'vue'
 import { useDatasetStore } from '@/stores/dataset'
 
+
 const datasetStore = useDatasetStore()
 
 const keyword = ref()
@@ -9,6 +10,8 @@ const keyword = ref()
 const groupBy = ref('sector')
 
 const searchHint = ref('Data includes 409,420 participants as of 2/15/2023.')
+
+const panels = ref([])
 
 const lawEnforcementDataComputed = computed(() => {
   if (!datasetStore.datasets.length) return []
@@ -74,6 +77,10 @@ const otherDataComputed = computed(() => {
 
 onMounted(async () => {
   await datasetStore.loadDatasets()
+  // opens all panels on mount
+  // panels.value = ['lawEnforcement', 'corrections', 'courts', 'crimes', 'victims', 'other']
+  // opens law enforcement panel on mount
+  // panels.value = ['lawEnforcement']
 })
 </script>
 
@@ -122,8 +129,200 @@ onMounted(async () => {
       </v-btn-toggle>
     </div>
 
-    <div>
-      <h2>Law Enforcement</h2>
+    <div class="mt-5">
+      <v-expansion-panels multiple v-model="panels" elevation="0" variant="accordion">
+        <v-expansion-panel          
+          value="lawEnforcement"
+        >
+          <v-expansion-panel-title>
+            <h2 class="my-3">Law Enforcement</h2>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row class="py-5">
+              <v-col col="12" md="3" v-for="dataset in lawEnforcementDataComputed">
+                <v-card variant="outlined">    
+                  <div>
+                    Categories: {{ dataset.attributes.categories }}
+                  </div>  
+                  <br>
+                  <div>
+                    Title: {{ dataset.attributes.title }}
+                  </div>       
+                  <br>
+        
+                  <div>
+                    Date: {{ dataset.attributes.date }}
+                  </div>
+                  <br>
+                  <div>
+                    Tags: {{ dataset.attributes.tags }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+        <v-expansion-panel          
+          value="corrections"
+        >
+          <v-expansion-panel-title>
+            <h2 class="my-3">Corrections</h2>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row class="py-5">
+              <v-col col="12" sm="12" md="3" v-for="dataset in correctionsDataComputed">
+                <v-card variant="outlined">     
+                  <div>
+                    Categories: {{ dataset.attributes.categories }}
+                  </div>  
+                  <br>
+                  <div>
+                    Title: {{ dataset.attributes.title }}
+                  </div>       
+                  <br>
+       
+                  <div>
+                    Date: {{ dataset.attributes.date }}
+                  </div>
+                  <br>
+                  <div>
+                    Tags: {{ dataset.attributes.tags }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <v-expansion-panel
+          value="courts"
+        >
+          <v-expansion-panel-title>
+            <h2 class="my-3">Courts</h2>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row class="py-5">
+              <v-col col="12" sm="12" md="3" v-for="dataset in courtsDataComputed">
+                <v-card variant="outlined">     
+                  <div>
+                    Categories: {{ dataset.attributes.categories }}
+                  </div>  
+                  <br>
+                  <div>
+                    Title: {{ dataset.attributes.title }}
+                  </div>       
+                  <br>
+                  <div>
+                    Date: {{ dataset.attributes.date }}
+                  </div>
+                  <br>
+                  <div>
+                    Tags: {{ dataset.attributes.tags }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <v-expansion-panel
+          value="crimes"
+        >
+          <v-expansion-panel-title>
+            <h2 class="my-3">Crimes</h2>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row class="py-5">
+              <v-col col="12" sm="12" md="3" v-for="dataset in crimesDataComputed">
+                <v-card variant="outlined">     
+                  <div>
+                    Categories: {{ dataset.attributes.categories }}
+                  </div>  
+                  <br>
+                  <div>
+                    Title: {{ dataset.attributes.title }}
+                  </div>       
+                  <br>
+                  <div>
+                    Date: {{ dataset.attributes.date }}
+                  </div>
+                  <br>
+                  <div>
+                    Tags: {{ dataset.attributes.tags }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <v-expansion-panel
+          value="victims"
+        >
+          <v-expansion-panel-title>
+            <h2 class="my-3">Victims</h2>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row class="py-5">
+              <v-col col="12" sm="12" md="3" v-for="dataset in victimsDataComputed">
+                <v-card variant="outlined">     
+                  <div>
+                    Categories: {{ dataset.attributes.categories }}
+                  </div>  
+                  <br>
+                  <div>
+                    Title: {{ dataset.attributes.title }}
+                  </div>       
+                  <br>
+                  <div>
+                    Date: {{ dataset.attributes.date }}
+                  </div>
+                  <br>
+                  <div>
+                    Tags: {{ dataset.attributes.tags }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+        <v-expansion-panel
+          value="other"
+        >
+          <v-expansion-panel-title>
+            <h2 class="my-3">Other</h2>
+          </v-expansion-panel-title>
+          <v-expansion-panel-text>
+            <v-row class="py-5">
+              <v-col col="12" sm="12" md="3" v-for="dataset in otherDataComputed">
+                <v-card variant="outlined">     
+                  <div>
+                    Categories: {{ dataset.attributes.categories }}
+                  </div>  
+                  <br>
+                  <div>
+                    Title: {{ dataset.attributes.title }}
+                  </div>       
+                  <br>          
+                  <div>
+                    Date: {{ dataset.attributes.date }}
+                  </div>
+                  <br>
+                  <div>
+                    Tags: {{ dataset.attributes.tags }}
+                  </div>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-expansion-panel-text>
+        </v-expansion-panel>
+
+      </v-expansion-panels>
+    </div>
+
+    <!-- <div>
+      <h2 class="my-3">Law Enforcement</h2>
       <v-row>
         <v-col col="12" md="3" v-for="dataset in lawEnforcementDataComputed">
           <v-card variant="outlined">    
@@ -135,10 +334,6 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <!-- <div>
-              Description: {{ dataset.attributes.description.substring(0, 50) }}
-            </div>  
-            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -152,7 +347,7 @@ onMounted(async () => {
     </div>  
 
     <div>
-      <h2>Corrections</h2>
+      <h2 class="my-3">Corrections</h2>
       <v-row>
         <v-col col="12" sm="12" md="3" v-for="dataset in correctionsDataComputed">
           <v-card variant="outlined">     
@@ -164,10 +359,6 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <!-- <div>
-              Description: {{ dataset.attributes.description.substring(0, 50) }}
-            </div>  
-            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -181,7 +372,7 @@ onMounted(async () => {
     </div>    
 
     <div>
-      <h2>Courts</h2>
+      <h2 class="my-3">Courts</h2>
       <v-row>
         <v-col col="12" sm="12" md="3" v-for="dataset in courtsDataComputed">
           <v-card variant="outlined">     
@@ -193,10 +384,6 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <!-- <div>
-              Description: {{ dataset.attributes.description }}
-            </div>  
-            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -210,7 +397,7 @@ onMounted(async () => {
     </div>    
 
     <div>
-      <h2>Crimes</h2>
+      <h2 class="my-3">Crimes</h2>
       <v-row>
         <v-col col="12" sm="12" md="3" v-for="dataset in crimesDataComputed">
           <v-card variant="outlined">     
@@ -222,10 +409,6 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <!-- <div>
-              Description: {{ dataset.attributes.description }}
-            </div>  
-            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -239,7 +422,7 @@ onMounted(async () => {
     </div>  
     
     <div>
-      <h2>Victims</h2>
+      <h2 class="my-3">Victims</h2>
       <v-row>
         <v-col col="12" sm="12" md="3" v-for="dataset in victimsDataComputed">
           <v-card variant="outlined">     
@@ -251,10 +434,6 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <!-- <div>
-              Description: {{ dataset.attributes.description }}
-            </div>  
-            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -268,7 +447,7 @@ onMounted(async () => {
     </div>  
 
     <div>
-      <h2>Other</h2>
+      <h2 class="my-3">Other</h2>
       <v-row>
         <v-col col="12" sm="12" md="3" v-for="dataset in otherDataComputed">
           <v-card variant="outlined">     
@@ -280,10 +459,6 @@ onMounted(async () => {
               Title: {{ dataset.attributes.title }}
             </div>       
             <br>
-            <!-- <div>
-              Description: {{ dataset.attributes.description }}
-            </div> 
-            <br> -->
             <div>
               Date: {{ dataset.attributes.date }}
             </div>
@@ -294,7 +469,7 @@ onMounted(async () => {
           </v-card>
         </v-col>
       </v-row>
-    </div>    
+    </div>     -->
   </v-container>
 </template>
 
