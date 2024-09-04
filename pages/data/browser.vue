@@ -5,7 +5,7 @@ import { useDatasetStore } from '@/stores/dataset'
 
 const datasetStore = useDatasetStore()
 
-const keyword = ref()
+const keyword = ref('')
 
 const groupBy = ref('sector')
 
@@ -17,8 +17,36 @@ const lawEnforcementDataComputed = computed(() => {
   if (!datasetStore.datasets.length) return []
 
   const data = []
+
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('law enforcement')) data.push(dataset)
+    if (dataset.attributes.categories.includes('law enforcement') && keyword.value === '') {
+      data.push(dataset)
+    } else if (dataset.attributes.categories.includes('law enforcement') && keyword.value !== '') {
+      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.date.includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      for (const category of dataset.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const tag of dataset.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const note of dataset.attributes.notes) {
+        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+    }
   }
   return data
 })
@@ -28,7 +56,34 @@ const correctionsDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('corrections')) data.push(dataset)
+    if (dataset.attributes.categories.includes('corrections') && keyword.value === '') {
+      data.push(dataset)
+    } else if (dataset.attributes.categories.includes('corrections') && keyword.value !== '') {
+      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.date.includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      for (const category of dataset.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const tag of dataset.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const note of dataset.attributes.notes) {
+        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+    }
   }
   return data
 })
@@ -38,7 +93,34 @@ const courtsDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('courts')) data.push(dataset)
+    if (dataset.attributes.categories.includes('courts') && keyword.value === '') {
+      data.push(dataset)
+    } else if (dataset.attributes.categories.includes('courts') && keyword.value !== '') {
+      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.date.includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      for (const category of dataset.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const tag of dataset.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const note of dataset.attributes.notes) {
+        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+    }
   }
   return data
 })
@@ -48,7 +130,34 @@ const crimesDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('crimes')) data.push(dataset)
+    if (dataset.attributes.categories.includes('crimes') && keyword.value === '') {
+      data.push(dataset)
+    } else if (dataset.attributes.categories.includes('crimes') && keyword.value !== '') {
+      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.date.includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      for (const category of dataset.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const tag of dataset.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const note of dataset.attributes.notes) {
+        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+    }
   }
   return data
 
@@ -59,7 +168,34 @@ const victimsDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('victims')) data.push(dataset)
+    if (dataset.attributes.categories.includes('victims') && keyword.value === '') {
+      data.push(dataset)
+    } else if (dataset.attributes.categories.includes('victims') && keyword.value !== '') {
+      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.date.includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      for (const category of dataset.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const tag of dataset.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const note of dataset.attributes.notes) {
+        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+    }
   }
   return data
 
@@ -70,7 +206,34 @@ const otherDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('other')) data.push(dataset)
+    if (dataset.attributes.categories.includes('other') && keyword.value === '') {
+      data.push(dataset)
+    } else if (dataset.attributes.categories.includes('other') && keyword.value !== '') {
+      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.date.includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(dataset)
+        continue
+      }
+      for (const category of dataset.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const tag of dataset.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+      for (const note of dataset.attributes.notes) {
+        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+        continue
+      }
+    }
   }
   return data
 })
