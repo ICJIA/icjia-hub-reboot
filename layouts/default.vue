@@ -21,25 +21,26 @@ const navItems = {
   },
   data: {
     path: '/data',
-    title: 'Data & Tools',
-    items: [
-      {
-        path: '/browser',
-        title: 'Data Browser'
-      },
-      {
-        path: '/snapshots',
-        title: 'Data Snapshots'
-      },
-      {
-        path: '/sources',
-        title: 'Data Sources'
-      },
-      {
-        path: '/roadmap',
-        title: 'Data Roadmap'
-      }
-    ]
+    title: 'Data Browser'    
+    // title: 'Data & Tools',
+    // items: [
+    //   {
+    //     path: '/browser',
+    //     title: 'Data Browser'
+    //   },
+    //   {
+    //     path: '/snapshots',
+    //     title: 'Data Snapshots'
+    //   },
+    //   {
+    //     path: '/sources',
+    //     title: 'Data Sources'
+    //   },
+    //   {
+    //     path: '/roadmap',
+    //     title: 'Data Roadmap'
+    //   }
+    // ]
   },
   publications: {
     path: '/publications',
@@ -150,7 +151,15 @@ const breadcrumbsComputed = computed(() => {
       <v-app-bar-nav-icon @click="showNavDrawer = !showNavDrawer"></v-app-bar-nav-icon>
     </template>    
     
-    <v-list-item @click="router.push('/')" title="Research Hub"></v-list-item>
+    <v-img
+      height="100%"
+      src="../assets/imgs/icjia-logo.ee010aa8.png"
+      cover
+      :max-width="100"
+    ></v-img>
+    <v-list-item @click="router.push('/')">
+      <h3 class="uppercase">Research Hub</h3>
+    </v-list-item>
     <v-spacer></v-spacer>
 
     <v-menu
@@ -158,11 +167,11 @@ const breadcrumbsComputed = computed(() => {
       :key="item.path"
       open-on-hover
     >
-      <template v-slot:activator="{ props }">
+      <template v-slot:activator="{ props, isActive }">        
         <v-list-item :to="item.path" :title=item.title v-bind="props"></v-list-item>
       </template>
 
-      <v-list>
+      <v-list v-if="item.items">
         <v-list-item
           v-for="(subitem) in item.items"
           :key="`${item.path}${subitem.path}`"

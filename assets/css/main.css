@@ -43,3 +43,7 @@
   --spacing-500: 3rem;
   --spacing-600: 4.5rem; */
 }
+
+.uppercase {
+  text-transform: uppercase;
+}
