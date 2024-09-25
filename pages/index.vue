@@ -71,11 +71,12 @@ onMounted(() => {
   </v-container>
   <v-container fluid class="support-you pa-15">
     <h1>See How We Can Support You</h1>
-    <div class="d-flex justify-space-around mt-10">      
+    <div class="d-flex flex-wrap mt-10">      
       <v-btn 
         v-for="item in supportYouItems"
         :key="item.title"variant="tonal"
         size="x-large"
+        class="support-item"
       >
         {{ item.title }}      
       </v-btn>
@@ -190,6 +191,20 @@ onMounted(() => {
 .contact-form {
   margin: 48px auto;
   max-width: 50%;
+}
+
+.support-item {
+  flex: 1 0 40%;
+  margin: 1rem;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  align-content: center;
+}
+
+@media (max-width: 760px) {
+  .support-item {
+    flex: 1 0 100%;
+  }
 }
 </style>
 
