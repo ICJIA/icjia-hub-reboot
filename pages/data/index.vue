@@ -238,6 +238,28 @@ const otherDataComputed = computed(() => {
   return data
 })
 
+const searchResultsDataTable = computed(() => {
+  const combinedSearchResults = [
+      lawEnforcementDataComputed.value, 
+      correctionsDataComputed.value, 
+      courtsDataComputed.value,
+      crimesDataComputed.value,
+      victimsDataComputed.value,
+      otherDataComputed.value
+    ].flat()
+
+  const dataTableItems = combinedSearchResults.map(result => {
+    return {
+      categories: result.attributes.categories,
+      date: result.attributes.date,
+      title: result.attributes.title,
+      description: result.attributes.description
+    }
+  })
+
+  return dataTableItems
+})
+
 onMounted(async () => {
   await datasetStore.loadDatasets()
   // opens all panels on mount
@@ -275,7 +297,7 @@ onMounted(async () => {
       </v-btn>   
     </div>
   </v-container>
-  <v-container fluid class="pa-15">
+  <v-container v-if="keyword == ''" fluid class="pa-15">
     <div class="d-flex justify-end">
       <v-btn-toggle
         v-model="groupBy"
@@ -633,6 +655,9 @@ onMounted(async () => {
         </v-col>
       </v-row>
     </div>     -->
+  </v-container>
+  <v-container v-else fluid class="pa-15">
+    <v-data-table :items="searchResultsDataTable"></v-data-table>
   </v-container>
 </template>
 
