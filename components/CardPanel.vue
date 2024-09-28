@@ -1,13 +1,10 @@
 <script setup>
-import { toRef } from 'vue';
 
 const props = defineProps({
   value: String,
   title: String,
   data: Object
 })
-
-const dataRef = toRef(props.data)
 </script>
 
 <template>
@@ -19,17 +16,16 @@ const dataRef = toRef(props.data)
     </v-expansion-panel-title>
     <v-expansion-panel-text>
       <v-row class="py-5">
-        <v-col col="12" sm="12" md="3" v-for="data in dataRef">
+        <v-col col="12" sm="12" md="3" v-for="data in props.data">
           <v-card variant="outlined">     
             <div>
               Categories: {{ data.attributes.categories }}
-            </div>  
+            </div>          
             <br>
             <div>
               Title: {{ data.attributes.title }}
             </div>       
             <br>
-
             <div>
               Date: {{ data.attributes.date }}
             </div>

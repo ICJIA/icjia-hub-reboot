@@ -282,39 +282,42 @@ const searchResultsDataTable = computed(() => {
 })
 
 
-const panelItems = [
-  { 
-    category: 'law enforcement',
-    title: 'Law Enforcement',
-    data: lawEnforcementDataComputed
-  },
-  { 
-    category: 'corrections',
-    title: 'Corrections',
-    data: correctionsDataComputed
-  },
-  { 
-    category: 'courts',
-    title: 'Courts',
-    data: courtsDataComputed
-  },
-  { 
-    category: 'crimes',
-    title: 'Crimes',
-    data: crimesDataComputed
-  },
-  { 
-    category: 'victims',
-    title: 'Victims',
-    data: victimsDataComputed
-  },
-  { 
-    category: 'other',
-    title: 'Other',
-    data: otherDataComputed
-  },
-  
-]
+const panelItems = computed(() => {
+  return [
+    { 
+      category: 'law enforcement',
+      title: 'Law Enforcement',
+      data: lawEnforcementDataComputed.value
+    },
+    { 
+      category: 'corrections',
+      title: 'Corrections',
+      data: correctionsDataComputed.value
+    },
+    { 
+      category: 'courts',
+      title: 'Courts',
+      data: courtsDataComputed.value
+    },
+    { 
+      category: 'crimes',
+      title: 'Crimes',
+      data: crimesDataComputed.value
+    },
+    { 
+      category: 'victims',
+      title: 'Victims',
+      data: victimsDataComputed.value
+    },
+    { 
+      category: 'other',
+      title: 'Other',
+      data: otherDataComputed.value
+    }    
+  ]
+})
+
+
 
 onMounted(async () => {
   await datasetStore.loadDatasets()
@@ -353,7 +356,7 @@ onMounted(async () => {
       </v-btn>   
     </div>
   </v-container>
-  <v-container v-if="keyword == ''" fluid class="pa-15">
+  <v-container v-if="keyword == '' && groupBy === 'sector'" fluid class="pa-15">
     <div class="d-flex justify-end">
       <v-btn-toggle
         v-model="groupBy"

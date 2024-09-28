@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
 import { useArticleStore } from '@/stores/article'
 
 import CardPanel from '~/components/CardPanel.vue';
@@ -14,8 +14,6 @@ const groupBy = ref('grid')
 const searchHint = ref('Quisque mollis massa vel neque lacinia, sed eleifend leo scelerisque.')
 
 const panels = ref([])
-
-const categories = ["law enforcement", "corrections", "courts", "crimes", "victims", "other"]
 
 // const categories = computed(() => {
 //   if (!articleStore.articles.length) return []
@@ -258,39 +256,50 @@ const searchResultsDataTable = computed(() => {
   return dataTableItems
 })
 
-const panelItems = [
-  { 
-    category: 'law enforcement',
-    title: 'Law Enforcement',
-    data: lawEnforcementDataComputed
-  },
-  { 
-    category: 'corrections',
-    title: 'Corrections',
-    data: correctionsDataComputed
-  },
-  { 
-    category: 'courts',
-    title: 'Courts',
-    data: courtsDataComputed
-  },
-  { 
-    category: 'crimes',
-    title: 'Crimes',
-    data: crimesDataComputed
-  },
-  { 
-    category: 'victims',
-    title: 'Victims',
-    data: victimsDataComputed
-  },
-  { 
-    category: 'other',
-    title: 'Other',
-    data: otherDataComputed
-  },
-  
-]
+const panelItems = computed(() => {
+  return [
+    { 
+      category: 'law enforcement',
+      title: 'Law Enforcement',
+      data: lawEnforcementDataComputed.value
+    },
+    { 
+      category: 'corrections',
+      title: 'Corrections',
+      data: correctionsDataComputed.value
+    },
+    { 
+      category: 'courts',
+      title: 'Courts',
+      data: courtsDataComputed.value
+    },
+    { 
+      category: 'crimes',
+      title: 'Crimes',
+      data: crimesDataComputed.value
+    },
+    { 
+      category: 'victims',
+      title: 'Victims',
+      data: victimsDataComputed.value
+    },
+    { 
+      category: 'other',
+      title: 'Other',
+      data: otherDataComputed.value
+    }  
+  ]
+})
+
+
+// watchEffect(async () => {
+//   if (groupBy.value === 'grid') {
+//     const expandedPanels = []
+//     for (const item of panelItems) {
+
+//     }
+//   }
+// })
 
 onMounted(async () => {
   await articleStore.loadArticles()
@@ -329,7 +338,7 @@ onMounted(async () => {
       </v-btn>   
     </div>
   </v-container>
-  <v-container v-if="keyword == ''" fluid class="pa-15">
+  <v-container fluid class="pa-15">
     <div class="d-flex justify-end">
       <v-btn-toggle
         v-model="groupBy"
@@ -346,7 +355,12 @@ onMounted(async () => {
     </div>
 
     <div class="mt-5">
-      <v-expansion-panels multiple v-model="panels" elevation="0" variant="accordion">
+      <v-expansion-panels 
+        v-show="groupBy === 'grid'"
+        multiple 
+        v-model="panels" 
+        elevation="0" 
+        variant="accordion">
         <template v-for="panelItem in panelItems" :key="panelItem.category">
           <CardPanel
             :value="panelItem.category"
@@ -355,161 +369,11 @@ onMounted(async () => {
           />
         </template>     
       </v-expansion-panels>
+       
+      <v-data-table v-show="groupBy === 'list'" :items="searchResultsDataTable"></v-data-table>
     </div>
+  </v-container>  
 
-    <!-- <div>
-      <h2 class="my-3">Law Enforcement</h2>
-      <v-row>
-        <v-col col="12" md="3" v-for="article in lawEnforcementDataComputed">
-          <v-card variant="outlined">    
-            <div>
-              Categories: {{ article.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ article.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ article.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ article.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>  
-
-    <div>
-      <h2 class="my-3">Corrections</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="article in correctionsDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ article.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ article.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ article.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ article.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>    
-
-    <div>
-      <h2 class="my-3">Courts</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="article in courtsDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ article.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ article.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ article.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ article.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>    
-
-    <div>
-      <h2 class="my-3">Crimes</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="article in crimesDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ article.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ article.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ article.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ article.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>  
-    
-    <div>
-      <h2 class="my-3">Victims</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="article in victimsDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ article.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ article.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ article.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ article.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>  
-
-    <div>
-      <h2 class="my-3">Other</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="article in otherDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ article.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ article.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ article.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ article.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>     -->
-  </v-container>
-  <v-container v-else fluid class="pa-15">
-    <v-data-table :items="searchResultsDataTable"></v-data-table>
-  </v-container>
 </template>
 
 <style scoped>
