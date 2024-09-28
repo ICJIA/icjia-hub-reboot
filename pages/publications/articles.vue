@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
-import { useDatasetStore } from '@/stores/dataset'
 import { useArticleStore } from '@/stores/article'
 
 import CardPanel from '~/components/CardPanel.vue';
 
-
-const datasetStore = useDatasetStore()
 
 const articleStore = useArticleStore()
 
@@ -35,36 +32,32 @@ const categories = ["law enforcement", "corrections", "courts", "crimes", "victi
 // })
 
 const lawEnforcementDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
 
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('law enforcement') && keyword.value === '') {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('law enforcement') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('law enforcement') && keyword.value === '') {
+      data.push(article)
+    } else if (article.attributes.categories.includes('law enforcement') && keyword.value !== '') {
+      if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
-      }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
     }
@@ -73,35 +66,31 @@ const lawEnforcementDataComputed = computed(() => {
 })
 
 const correctionsDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('corrections') && keyword.value === '') {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('corrections') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('corrections') && keyword.value === '') {
+      data.push(article)
+    } else if (article.attributes.categories.includes('corrections') && keyword.value !== '') {
+      if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
-      }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
     }
@@ -110,35 +99,31 @@ const correctionsDataComputed = computed(() => {
 })
 
 const courtsDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('courts') && keyword.value === '') {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('courts') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('courts') && keyword.value === '') {
+      data.push(article)
+    } else if (article.attributes.categories.includes('courts') && keyword.value !== '') {
+      if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
-      }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
     }
@@ -147,35 +132,31 @@ const courtsDataComputed = computed(() => {
 })
 
 const crimesDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('crimes') && keyword.value === '') {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('crimes') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('crimes') && keyword.value === '') {
+      data.push(article)
+    } else if (article.attributes.categories.includes('crimes') && keyword.value !== '') {
+      if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
-      }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
     }
@@ -185,35 +166,31 @@ const crimesDataComputed = computed(() => {
 })
 
 const victimsDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('victims') && keyword.value === '') {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('victims') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('victims') && keyword.value === '') {
+      data.push(article)
+    } else if (article.attributes.categories.includes('victims') && keyword.value !== '') {
+      if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
-      }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
     }
@@ -223,35 +200,31 @@ const victimsDataComputed = computed(() => {
 })
 
 const otherDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []  
+  if (!articleStore.articles.length) return []  
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('other') && keyword.value === '') {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('other') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('other') && keyword.value === '') {
+      data.push(article)
+    } else if (article.attributes.categories.includes('other') && keyword.value !== '') {
+      if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
-      }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
     }
@@ -261,22 +234,26 @@ const otherDataComputed = computed(() => {
 
 const searchResultsDataTable = computed(() => {
   const combinedSearchResults = [
-      lawEnforcementDataComputed, 
-      correctionsDataComputed, 
-      courtsDataComputed,
-      crimesDataComputed,
-      victimsDataComputed,
-      otherDataComputed
+      lawEnforcementDataComputed.value, 
+      correctionsDataComputed.value, 
+      courtsDataComputed.value,
+      crimesDataComputed.value,
+      victimsDataComputed.value,
+      otherDataComputed.value
     ].flat()
 
-  const dataTableItems = combinedSearchResults.map(result => {
-    return {
-      categories: result.attributes.categories,
-      date: result.attributes.date,
-      title: result.attributes.title,
-      description: result.attributes.description
-    }
-  })
+  let dataTableItems = []
+
+  if (combinedSearchResults.length) {
+    dataTableItems = combinedSearchResults.map(result => {
+      return {
+        categories: result.attributes.categories,
+        date: result.attributes.date,
+        title: result.attributes.title,
+        abstract: result.attributes.abstract
+      }
+    })
+  }
 
   return dataTableItems
 })
@@ -317,7 +294,6 @@ const panelItems = [
 
 onMounted(async () => {
   await articleStore.loadArticles()
-  await datasetStore.loadDatasets()
   // opens all panels on mount
   // panels.value = ['lawEnforcement', 'corrections', 'courts', 'crimes', 'victims', 'other']
   // opens law enforcement panel on mount
@@ -384,22 +360,22 @@ onMounted(async () => {
     <!-- <div>
       <h2 class="my-3">Law Enforcement</h2>
       <v-row>
-        <v-col col="12" md="3" v-for="dataset in lawEnforcementDataComputed">
+        <v-col col="12" md="3" v-for="article in lawEnforcementDataComputed">
           <v-card variant="outlined">    
             <div>
-              Categories: {{ dataset.attributes.categories }}
+              Categories: {{ article.attributes.categories }}
             </div>  
             <br>
             <div>
-              Title: {{ dataset.attributes.title }}
+              Title: {{ article.attributes.title }}
             </div>       
             <br>
             <div>
-              Date: {{ dataset.attributes.date }}
+              Date: {{ article.attributes.date }}
             </div>
             <br>
             <div>
-              Tags: {{ dataset.attributes.tags }}
+              Tags: {{ article.attributes.tags }}
             </div>
           </v-card>
         </v-col>
@@ -409,22 +385,22 @@ onMounted(async () => {
     <div>
       <h2 class="my-3">Corrections</h2>
       <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in correctionsDataComputed">
+        <v-col col="12" sm="12" md="3" v-for="article in correctionsDataComputed">
           <v-card variant="outlined">     
             <div>
-              Categories: {{ dataset.attributes.categories }}
+              Categories: {{ article.attributes.categories }}
             </div>  
             <br>
             <div>
-              Title: {{ dataset.attributes.title }}
+              Title: {{ article.attributes.title }}
             </div>       
             <br>
             <div>
-              Date: {{ dataset.attributes.date }}
+              Date: {{ article.attributes.date }}
             </div>
             <br>
             <div>
-              Tags: {{ dataset.attributes.tags }}
+              Tags: {{ article.attributes.tags }}
             </div>
           </v-card>
         </v-col>
@@ -434,22 +410,22 @@ onMounted(async () => {
     <div>
       <h2 class="my-3">Courts</h2>
       <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in courtsDataComputed">
+        <v-col col="12" sm="12" md="3" v-for="article in courtsDataComputed">
           <v-card variant="outlined">     
             <div>
-              Categories: {{ dataset.attributes.categories }}
+              Categories: {{ article.attributes.categories }}
             </div>  
             <br>
             <div>
-              Title: {{ dataset.attributes.title }}
+              Title: {{ article.attributes.title }}
             </div>       
             <br>
             <div>
-              Date: {{ dataset.attributes.date }}
+              Date: {{ article.attributes.date }}
             </div>
             <br>
             <div>
-              Tags: {{ dataset.attributes.tags }}
+              Tags: {{ article.attributes.tags }}
             </div>
           </v-card>
         </v-col>
@@ -459,22 +435,22 @@ onMounted(async () => {
     <div>
       <h2 class="my-3">Crimes</h2>
       <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in crimesDataComputed">
+        <v-col col="12" sm="12" md="3" v-for="article in crimesDataComputed">
           <v-card variant="outlined">     
             <div>
-              Categories: {{ dataset.attributes.categories }}
+              Categories: {{ article.attributes.categories }}
             </div>  
             <br>
             <div>
-              Title: {{ dataset.attributes.title }}
+              Title: {{ article.attributes.title }}
             </div>       
             <br>
             <div>
-              Date: {{ dataset.attributes.date }}
+              Date: {{ article.attributes.date }}
             </div>
             <br>
             <div>
-              Tags: {{ dataset.attributes.tags }}
+              Tags: {{ article.attributes.tags }}
             </div>
           </v-card>
         </v-col>
@@ -484,22 +460,22 @@ onMounted(async () => {
     <div>
       <h2 class="my-3">Victims</h2>
       <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in victimsDataComputed">
+        <v-col col="12" sm="12" md="3" v-for="article in victimsDataComputed">
           <v-card variant="outlined">     
             <div>
-              Categories: {{ dataset.attributes.categories }}
+              Categories: {{ article.attributes.categories }}
             </div>  
             <br>
             <div>
-              Title: {{ dataset.attributes.title }}
+              Title: {{ article.attributes.title }}
             </div>       
             <br>
             <div>
-              Date: {{ dataset.attributes.date }}
+              Date: {{ article.attributes.date }}
             </div>
             <br>
             <div>
-              Tags: {{ dataset.attributes.tags }}
+              Tags: {{ article.attributes.tags }}
             </div>
           </v-card>
         </v-col>
@@ -509,22 +485,22 @@ onMounted(async () => {
     <div>
       <h2 class="my-3">Other</h2>
       <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in otherDataComputed">
+        <v-col col="12" sm="12" md="3" v-for="article in otherDataComputed">
           <v-card variant="outlined">     
             <div>
-              Categories: {{ dataset.attributes.categories }}
+              Categories: {{ article.attributes.categories }}
             </div>  
             <br>
             <div>
-              Title: {{ dataset.attributes.title }}
+              Title: {{ article.attributes.title }}
             </div>       
             <br>
             <div>
-              Date: {{ dataset.attributes.date }}
+              Date: {{ article.attributes.date }}
             </div>
             <br>
             <div>
-              Tags: {{ dataset.attributes.tags }}
+              Tags: {{ article.attributes.tags }}
             </div>
           </v-card>
         </v-col>

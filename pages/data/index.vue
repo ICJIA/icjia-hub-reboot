@@ -44,9 +44,12 @@ const lawEnforcementDataComputed = computed(() => {
         if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
         continue
       }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
+      // notes can be null
+      if (dataset.attributes.notes) {
+        for (const note of dataset.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+          continue
+        }
       }
     }
   }
@@ -57,6 +60,7 @@ const correctionsDataComputed = computed(() => {
   if (!datasetStore.datasets.length) return []
 
   const data = []
+
   for (const dataset of datasetStore.datasets) {
     if (dataset.attributes.categories.includes('corrections') && keyword.value === '') {
       data.push(dataset)
@@ -81,9 +85,12 @@ const correctionsDataComputed = computed(() => {
         if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
         continue
       }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
+      // notes can be null
+      if (dataset.attributes.notes) {
+        for (const note of dataset.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+          continue
+        }
       }
     }
   }
@@ -118,9 +125,12 @@ const courtsDataComputed = computed(() => {
         if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
         continue
       }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
+      // notes can be null
+      if (dataset.attributes.notes) {
+        for (const note of dataset.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+          continue
+        }
       }
     }
   }
@@ -155,9 +165,12 @@ const crimesDataComputed = computed(() => {
         if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
         continue
       }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
+      // notes can be null
+      if (dataset.attributes.notes) {
+        for (const note of dataset.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+          continue
+        }
       }
     }
   }
@@ -193,9 +206,12 @@ const victimsDataComputed = computed(() => {
         if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
         continue
       }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
+      // notes can be null
+      if (dataset.attributes.notes) {
+        for (const note of dataset.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+          continue
+        }
       }
     }
   }
@@ -231,9 +247,12 @@ const otherDataComputed = computed(() => {
         if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
         continue
       }
-      for (const note of dataset.attributes.notes) {
-        if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
-        continue
+      // notes can be null
+      if (dataset.attributes.notes) {
+        for (const note of dataset.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+          continue
+        }
       }
     }
   }
