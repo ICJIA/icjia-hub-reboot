@@ -157,8 +157,9 @@ const breadcrumbsComputed = computed(() => {
       cover
       :max-width="100"
     ></v-img>
-    <v-list-item @click="router.push('/')">
-      <h3 class="uppercase">Research Hub</h3>
+    <span class="divider"></span>
+    <v-list-item @click="router.push('/')" class="pa-1">
+      <h4 class="uppercase">Research Hub</h4>
     </v-list-item>
     <v-spacer></v-spacer>
 
@@ -168,7 +169,9 @@ const breadcrumbsComputed = computed(() => {
       open-on-hover
     >
       <template v-slot:activator="{ props, isActive }">        
-        <v-list-item :to="item.path" :title=item.title v-bind="props"></v-list-item>
+        <v-list-item :to="item.path" v-bind="props">
+          <v-list-item-title class="font-weight-bold uppercase">{{ item.title }}</v-list-item-title>
+        </v-list-item>
       </template>
 
       <v-list v-if="item.items">
@@ -196,6 +199,13 @@ const breadcrumbsComputed = computed(() => {
 <style scoped>
 .breadcrumbs-container {
   margin-top: 74px;
+}
+
+.divider {
+  width: 2px;
+  height: 66px;
+  background-color: var(--clr-dark-500);
+  margin: 0 1.3rem 0 2rem;
 }
 </style>
 

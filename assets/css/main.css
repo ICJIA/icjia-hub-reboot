@@ -2,7 +2,14 @@
   /* --clr-primary-100: hsl(215, 100%, 95%);
   --clr-primary-300: hsl(215, 100%, 73%); */
   --clr-primary-light: hsl(206.51, 81.13%, 95%);
+  --clr-primary-400: hsl(206.51, 81.13%, 30%);
   --clr-primary: hsl(206.51, 81.13%, 20.78%);
+
+  --clr-dark-400: hsl(0, 0%, 75%);
+  --clr-dark-500: hsl(0, 0%, 55%);
+  --clr-dark-600: hsl(0, 0%, 35%);
+  --clr-dark-800: hsl(216, 100%, 9%);
+  --clr-dark-900: hsl(0, 0%, 0%);
 
   /* --clr-light: hsl(0, 0%, 100%);
   --clr-light-200: hsl(0, 0%, 90%);
@@ -45,5 +52,5 @@
 }
 
 .uppercase {
-  text-transform: uppercase;
+  text-transform: uppercase !important;
 }
