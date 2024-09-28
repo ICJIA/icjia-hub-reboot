@@ -2,6 +2,8 @@
 import { ref, onMounted, computed } from 'vue'
 import { useDatasetStore } from '@/stores/dataset'
 
+import CardPanel from '~/components/CardPanel.vue';
+
 
 const datasetStore = useDatasetStore()
 
@@ -260,6 +262,41 @@ const searchResultsDataTable = computed(() => {
   return dataTableItems
 })
 
+
+const panelItems = [
+  { 
+    category: 'law enforcement',
+    title: 'Law Enforcement',
+    data: lawEnforcementDataComputed
+  },
+  { 
+    category: 'corrections',
+    title: 'Corrections',
+    data: correctionsDataComputed
+  },
+  { 
+    category: 'courts',
+    title: 'Courts',
+    data: courtsDataComputed
+  },
+  { 
+    category: 'crimes',
+    title: 'Crimes',
+    data: crimesDataComputed
+  },
+  { 
+    category: 'victims',
+    title: 'Victims',
+    data: victimsDataComputed
+  },
+  { 
+    category: 'other',
+    title: 'Other',
+    data: otherDataComputed
+  },
+  
+]
+
 onMounted(async () => {
   await datasetStore.loadDatasets()
   // opens all panels on mount
@@ -316,345 +353,15 @@ onMounted(async () => {
 
     <div class="mt-5">
       <v-expansion-panels multiple v-model="panels" elevation="0" variant="accordion">
-        <v-expansion-panel          
-          value="lawEnforcement"
-        >
-          <v-expansion-panel-title>
-            <h2 class="my-3">Law Enforcement</h2>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-row class="py-5">
-              <v-col col="12" md="3" v-for="dataset in lawEnforcementDataComputed">
-                <v-card variant="outlined">    
-                  <div>
-                    Categories: {{ dataset.attributes.categories }}
-                  </div>  
-                  <br>
-                  <div>
-                    Title: {{ dataset.attributes.title }}
-                  </div>       
-                  <br>
-        
-                  <div>
-                    Date: {{ dataset.attributes.date }}
-                  </div>
-                  <br>
-                  <div>
-                    Tags: {{ dataset.attributes.tags }}
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-        <v-expansion-panel          
-          value="corrections"
-        >
-          <v-expansion-panel-title>
-            <h2 class="my-3">Corrections</h2>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-row class="py-5">
-              <v-col col="12" sm="12" md="3" v-for="dataset in correctionsDataComputed">
-                <v-card variant="outlined">     
-                  <div>
-                    Categories: {{ dataset.attributes.categories }}
-                  </div>  
-                  <br>
-                  <div>
-                    Title: {{ dataset.attributes.title }}
-                  </div>       
-                  <br>
-       
-                  <div>
-                    Date: {{ dataset.attributes.date }}
-                  </div>
-                  <br>
-                  <div>
-                    Tags: {{ dataset.attributes.tags }}
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-
-        <v-expansion-panel
-          value="courts"
-        >
-          <v-expansion-panel-title>
-            <h2 class="my-3">Courts</h2>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-row class="py-5">
-              <v-col col="12" sm="12" md="3" v-for="dataset in courtsDataComputed">
-                <v-card variant="outlined">     
-                  <div>
-                    Categories: {{ dataset.attributes.categories }}
-                  </div>  
-                  <br>
-                  <div>
-                    Title: {{ dataset.attributes.title }}
-                  </div>       
-                  <br>
-                  <div>
-                    Date: {{ dataset.attributes.date }}
-                  </div>
-                  <br>
-                  <div>
-                    Tags: {{ dataset.attributes.tags }}
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-
-        <v-expansion-panel
-          value="crimes"
-        >
-          <v-expansion-panel-title>
-            <h2 class="my-3">Crimes</h2>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-row class="py-5">
-              <v-col col="12" sm="12" md="3" v-for="dataset in crimesDataComputed">
-                <v-card variant="outlined">     
-                  <div>
-                    Categories: {{ dataset.attributes.categories }}
-                  </div>  
-                  <br>
-                  <div>
-                    Title: {{ dataset.attributes.title }}
-                  </div>       
-                  <br>
-                  <div>
-                    Date: {{ dataset.attributes.date }}
-                  </div>
-                  <br>
-                  <div>
-                    Tags: {{ dataset.attributes.tags }}
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-
-        <v-expansion-panel
-          value="victims"
-        >
-          <v-expansion-panel-title>
-            <h2 class="my-3">Victims</h2>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-row class="py-5">
-              <v-col col="12" sm="12" md="3" v-for="dataset in victimsDataComputed">
-                <v-card variant="outlined">     
-                  <div>
-                    Categories: {{ dataset.attributes.categories }}
-                  </div>  
-                  <br>
-                  <div>
-                    Title: {{ dataset.attributes.title }}
-                  </div>       
-                  <br>
-                  <div>
-                    Date: {{ dataset.attributes.date }}
-                  </div>
-                  <br>
-                  <div>
-                    Tags: {{ dataset.attributes.tags }}
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-
-        <v-expansion-panel
-          value="other"
-        >
-          <v-expansion-panel-title>
-            <h2 class="my-3">Other</h2>
-          </v-expansion-panel-title>
-          <v-expansion-panel-text>
-            <v-row class="py-5">
-              <v-col col="12" sm="12" md="3" v-for="dataset in otherDataComputed">
-                <v-card variant="outlined">     
-                  <div>
-                    Categories: {{ dataset.attributes.categories }}
-                  </div>  
-                  <br>
-                  <div>
-                    Title: {{ dataset.attributes.title }}
-                  </div>       
-                  <br>          
-                  <div>
-                    Date: {{ dataset.attributes.date }}
-                  </div>
-                  <br>
-                  <div>
-                    Tags: {{ dataset.attributes.tags }}
-                  </div>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-text>
-        </v-expansion-panel>
-
+        <template v-for="panelItem in panelItems" :key="panelItem.category">
+          <CardPanel
+            :value="panelItem.category"
+            :title="panelItem.title"
+            :data="panelItem.data"
+          />
+        </template>
       </v-expansion-panels>
     </div>
-
-    <!-- <div>
-      <h2 class="my-3">Law Enforcement</h2>
-      <v-row>
-        <v-col col="12" md="3" v-for="dataset in lawEnforcementDataComputed">
-          <v-card variant="outlined">    
-            <div>
-              Categories: {{ dataset.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ dataset.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ dataset.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ dataset.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>  
-
-    <div>
-      <h2 class="my-3">Corrections</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in correctionsDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ dataset.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ dataset.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ dataset.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ dataset.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>    
-
-    <div>
-      <h2 class="my-3">Courts</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in courtsDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ dataset.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ dataset.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ dataset.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ dataset.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>    
-
-    <div>
-      <h2 class="my-3">Crimes</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in crimesDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ dataset.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ dataset.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ dataset.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ dataset.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>  
-    
-    <div>
-      <h2 class="my-3">Victims</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in victimsDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ dataset.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ dataset.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ dataset.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ dataset.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>  
-
-    <div>
-      <h2 class="my-3">Other</h2>
-      <v-row>
-        <v-col col="12" sm="12" md="3" v-for="dataset in otherDataComputed">
-          <v-card variant="outlined">     
-            <div>
-              Categories: {{ dataset.attributes.categories }}
-            </div>  
-            <br>
-            <div>
-              Title: {{ dataset.attributes.title }}
-            </div>       
-            <br>
-            <div>
-              Date: {{ dataset.attributes.date }}
-            </div>
-            <br>
-            <div>
-              Tags: {{ dataset.attributes.tags }}
-            </div>
-          </v-card>
-        </v-col>
-      </v-row>
-    </div>     -->
   </v-container>
   <v-container v-else fluid class="pa-15">
     <v-data-table :items="searchResultsDataTable"></v-data-table>

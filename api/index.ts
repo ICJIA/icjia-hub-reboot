@@ -2,7 +2,27 @@ import axios, { Axios, type AxiosPromise, type AxiosResponse } from 'axios'
 
 const baseUrl = 'https://hub.icjia-api.cloud/api'
 
-const actions = {
+const actions = {  
+  async listArticles () {
+    try {  
+      const response: AxiosResponse = await axios.get(`${baseUrl}/articles`)
+      const { data } = response
+      if (data) {
+        return data
+      } else {
+        throw new Error('data not found')
+      }
+    } catch (error) {
+      if (axios.isAxiosError(error)) {    
+        // handle axios error
+        console.log(error)
+      } else {    
+        // handle self defined or unexpected error
+        console.log(error)
+      }
+    }
+  },
+
   async listDataset () {
     try {  
       const response: AxiosResponse = await axios.get(`${baseUrl}/datasets`)
