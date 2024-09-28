@@ -35,9 +35,9 @@ const lawEnforcementDataComputed = computed(() => {
   const data = []
 
   for (const article of articleStore.articles) {
-    if (article.attributes.categories.includes('law enforcement') && keyword.value === '') {
+    if (article.attributes.categories.includes('law enforcement') && (keyword.value === '' || keyword.value === null)) {
       data.push(article)
-    } else if (article.attributes.categories.includes('law enforcement') && keyword.value !== '') {
+    } else if (article.attributes.categories.includes('law enforcement') && keyword.value !== '' && keyword.value !== null) {
       if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
         data.push(article)
         continue
@@ -68,9 +68,9 @@ const correctionsDataComputed = computed(() => {
 
   const data = []
   for (const article of articleStore.articles) {
-    if (article.attributes.categories.includes('corrections') && keyword.value === '') {
+    if (article.attributes.categories.includes('corrections') && (keyword.value === '' || keyword.value === null)) {
       data.push(article)
-    } else if (article.attributes.categories.includes('corrections') && keyword.value !== '') {
+    } else if (article.attributes.categories.includes('corrections') && keyword.value !== '' && keyword.value !== null) {
       if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
         data.push(article)
         continue
@@ -101,9 +101,9 @@ const courtsDataComputed = computed(() => {
 
   const data = []
   for (const article of articleStore.articles) {
-    if (article.attributes.categories.includes('courts') && keyword.value === '') {
+    if (article.attributes.categories.includes('courts') && (keyword.value === '' || keyword.value === null)) {
       data.push(article)
-    } else if (article.attributes.categories.includes('courts') && keyword.value !== '') {
+    } else if (article.attributes.categories.includes('courts') && keyword.value !== '' && keyword.value !== null) {
       if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
         data.push(article)
         continue
@@ -134,9 +134,9 @@ const crimesDataComputed = computed(() => {
 
   const data = []
   for (const article of articleStore.articles) {
-    if (article.attributes.categories.includes('crimes') && keyword.value === '') {
+    if (article.attributes.categories.includes('crimes') && (keyword.value === '' || keyword.value === null)) {
       data.push(article)
-    } else if (article.attributes.categories.includes('crimes') && keyword.value !== '') {
+    } else if (article.attributes.categories.includes('crimes') && keyword.value !== '' && keyword.value !== null) {
       if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
         data.push(article)
         continue
@@ -168,9 +168,9 @@ const victimsDataComputed = computed(() => {
 
   const data = []
   for (const article of articleStore.articles) {
-    if (article.attributes.categories.includes('victims') && keyword.value === '') {
+    if (article.attributes.categories.includes('victims') && (keyword.value === '' || keyword.value === null)) {
       data.push(article)
-    } else if (article.attributes.categories.includes('victims') && keyword.value !== '') {
+    } else if (article.attributes.categories.includes('victims') && keyword.value !== '' && keyword.value !== null) {
       if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
         data.push(article)
         continue
@@ -202,9 +202,9 @@ const otherDataComputed = computed(() => {
 
   const data = []
   for (const article of articleStore.articles) {
-    if (article.attributes.categories.includes('other') && keyword.value === '') {
+    if (article.attributes.categories.includes('other') && (keyword.value === '' || keyword.value === null)) {
       data.push(article)
-    } else if (article.attributes.categories.includes('other') && keyword.value !== '') {
+    } else if (article.attributes.categories.includes('other') && keyword.value !== '' && keyword.value !== null) {
       if (article.attributes.abstract.toLowerCase().includes(keyword.value)) {
         data.push(article)
         continue
@@ -291,15 +291,19 @@ const panelItems = computed(() => {
   ]
 })
 
-
-// watchEffect(async () => {
-//   if (groupBy.value === 'grid') {
-//     const expandedPanels = []
-//     for (const item of panelItems) {
-
-//     }
-//   }
-// })
+watchEffect(async () => {
+  if (groupBy.value === 'grid') {
+    if (keyword.value !== '' && keyword.value !== null) {
+      const expandedPanels = []
+      for (const item of panelItems.value) {
+        if (item.data.length) expandedPanels.push(item.category)
+      }
+      panels.value = expandedPanels
+    } else if (keyword.value === '' || keyword.value === null) {
+      panels.value = []
+    }
+  }
+})
 
 onMounted(async () => {
   await articleStore.loadArticles()

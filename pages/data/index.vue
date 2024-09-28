@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, watchEffect } from 'vue'
 import { useDatasetStore } from '@/stores/dataset'
 
 import CardPanel from '~/components/CardPanel.vue';
@@ -21,9 +21,9 @@ const lawEnforcementDataComputed = computed(() => {
   const data = []
 
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('law enforcement') && keyword.value === '') {
+    if (dataset.attributes.categories.includes('law enforcement') && (keyword.value === '' || keyword.value === null)) {
       data.push(dataset)
-    } else if (dataset.attributes.categories.includes('law enforcement') && keyword.value !== '') {
+    } else if (dataset.attributes.categories.includes('law enforcement') && keyword.value !== '' && keyword.value !== null) {
       if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
         data.push(dataset)
         continue
@@ -62,9 +62,9 @@ const correctionsDataComputed = computed(() => {
   const data = []
 
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('corrections') && keyword.value === '') {
+    if (dataset.attributes.categories.includes('corrections') && (keyword.value === '' || keyword.value === null)) {
       data.push(dataset)
-    } else if (dataset.attributes.categories.includes('corrections') && keyword.value !== '') {
+    } else if (dataset.attributes.categories.includes('corrections') && keyword.value !== '' && keyword.value !== null) {
       if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
         data.push(dataset)
         continue
@@ -102,9 +102,9 @@ const courtsDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('courts') && keyword.value === '') {
+    if (dataset.attributes.categories.includes('courts') && (keyword.value === '' || keyword.value === null)) {
       data.push(dataset)
-    } else if (dataset.attributes.categories.includes('courts') && keyword.value !== '') {
+    } else if (dataset.attributes.categories.includes('courts') && keyword.value !== '' && keyword.value !== null) {
       if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
         data.push(dataset)
         continue
@@ -142,9 +142,9 @@ const crimesDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('crimes') && keyword.value === '') {
+    if (dataset.attributes.categories.includes('crimes') && (keyword.value === '' || keyword.value === null)) {
       data.push(dataset)
-    } else if (dataset.attributes.categories.includes('crimes') && keyword.value !== '') {
+    } else if (dataset.attributes.categories.includes('crimes') && keyword.value !== '' && keyword.value !== null) {
       if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
         data.push(dataset)
         continue
@@ -183,9 +183,9 @@ const victimsDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('victims') && keyword.value === '') {
+    if (dataset.attributes.categories.includes('victims') && (keyword.value === '' || keyword.value === null)) {
       data.push(dataset)
-    } else if (dataset.attributes.categories.includes('victims') && keyword.value !== '') {
+    } else if (dataset.attributes.categories.includes('victims') && keyword.value !== '' && keyword.value !== null) {
       if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
         data.push(dataset)
         continue
@@ -224,7 +224,7 @@ const otherDataComputed = computed(() => {
 
   const data = []
   for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('other') && keyword.value === '') {
+    if (dataset.attributes.categories.includes('other') && (keyword.value === '' || keyword.value === null)) {
       data.push(dataset)
     } else if (dataset.attributes.categories.includes('other') && keyword.value !== '') {
       if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
@@ -269,7 +269,9 @@ const searchResultsDataTable = computed(() => {
       otherDataComputed.value
     ].flat()
 
-  const dataTableItems = combinedSearchResults.map(result => {
+  let dataTableItems = []
+
+  dataTableItems = combinedSearchResults.map(result => {
     return {
       categories: result.attributes.categories,
       date: result.attributes.date,
@@ -317,7 +319,19 @@ const panelItems = computed(() => {
   ]
 })
 
-
+watchEffect(async () => {
+  if (groupBy.value === 'sector') {
+    if (keyword.value !== '' && keyword.value !== null) {
+      const expandedPanels = []
+      for (const item of panelItems.value) {
+        if (item.data.length) expandedPanels.push(item.category)
+      }
+      panels.value = expandedPanels
+    } else if (keyword.value === '' || keyword.value === null) {
+      panels.value = []
+    }
+  }
+})
 
 onMounted(async () => {
   await datasetStore.loadDatasets()
@@ -356,7 +370,7 @@ onMounted(async () => {
       </v-btn>   
     </div>
   </v-container>
-  <v-container v-if="keyword == '' && groupBy === 'sector'" fluid class="pa-15">
+  <v-container fluid class="pa-15">
     <div class="d-flex justify-end">
       <v-btn-toggle
         v-model="groupBy"
@@ -366,27 +380,33 @@ onMounted(async () => {
         <v-btn value="sector">
           Sector
         </v-btn>
-
         <v-btn value="year">
           Year
+        </v-btn>
+        <v-btn value="list">
+          <v-icon icon="mdi-format-list-checkbox" size="large"></v-icon>
         </v-btn>
       </v-btn-toggle>
     </div>
 
     <div class="mt-5">
-      <v-expansion-panels multiple v-model="panels" elevation="0" variant="accordion">
+      <v-expansion-panels 
+        v-show="groupBy === 'sector'"
+        multiple 
+        v-model="panels" 
+        elevation="0" 
+        variant="accordion">
         <template v-for="panelItem in panelItems" :key="panelItem.category">
           <CardPanel
             :value="panelItem.category"
             :title="panelItem.title"
             :data="panelItem.data"
           />
-        </template>
+        </template>     
       </v-expansion-panels>
+       
+      <v-data-table v-show="groupBy === 'list'" :items="searchResultsDataTable"></v-data-table>
     </div>
-  </v-container>
-  <v-container v-else fluid class="pa-15">
-    <v-data-table :items="searchResultsDataTable"></v-data-table>
   </v-container>
 </template>
 
