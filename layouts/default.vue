@@ -202,7 +202,7 @@ const breadcrumbsComputed = computed(() => {
 }
 
 .divider {
-  width: 2px;
+  width: 3px;
   height: 66px;
   background-color: var(--clr-dark-500);
   margin: 0 1.3rem 0 2rem;
