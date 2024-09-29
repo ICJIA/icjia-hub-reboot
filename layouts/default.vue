@@ -158,9 +158,10 @@ const breadcrumbsComputed = computed(() => {
       :max-width="80"
     ></v-img>
     <!-- <span class="divider"></span> -->
-    <v-list-item @click="router.push('/')" class="pa-1" color="#E8EAF6">
+    <!-- <v-list-item @click="router.push('/')" class="pa-1">
       <h4 class="uppercase hub-text">Research Hub</h4>
-    </v-list-item>
+    </v-list-item> -->
+    <h4 @click="router.push('/')" class="uppercase hub-text">Research Hub</h4>
     <v-spacer></v-spacer>
 
     <v-menu
@@ -204,7 +205,9 @@ const breadcrumbsComputed = computed(() => {
 .hub-text {
   margin-left: 1rem;
   padding: .5rem .75rem;
-  box-shadow: 0 0 5px rgb(29 26 26 / 65%);
+  /* box-shadow: 0 0 5px rgb(29 26 26 / 65%); */
+  box-shadow: -5px 0 2px -3px rgb(29 26 26 / 65%);
+  cursor: pointer;
 }
 
 .divider {
