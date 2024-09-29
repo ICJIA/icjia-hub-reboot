@@ -155,11 +155,11 @@ const breadcrumbsComputed = computed(() => {
       height="100%"
       src="../assets/imgs/icjia-logo.ee010aa8.png"
       cover
-      :max-width="100"
+      :max-width="80"
     ></v-img>
-    <span class="divider"></span>
-    <v-list-item @click="router.push('/')" class="pa-1">
-      <h4 class="uppercase">Research Hub</h4>
+    <!-- <span class="divider"></span> -->
+    <v-list-item @click="router.push('/')" class="pa-1" color="#E8EAF6">
+      <h4 class="uppercase hub-text">Research Hub</h4>
     </v-list-item>
     <v-spacer></v-spacer>
 
@@ -201,8 +201,14 @@ const breadcrumbsComputed = computed(() => {
   margin-top: 74px;
 }
 
+.hub-text {
+  margin-left: 1rem;
+  padding: .5rem .75rem;
+  box-shadow: 0 0 5px rgb(29 26 26 / 65%);
+}
+
 .divider {
-  width: 3px;
+  width: 2.5px;
   height: 66px;
   background-color: var(--clr-dark-500);
   margin: 0 1.3rem 0 2rem;
