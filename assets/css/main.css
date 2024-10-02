@@ -51,6 +51,10 @@
   --spacing-600: 4.5rem; */
 }
 
+.color-primary {
+  color: var(--clr-primary)
+}
+
 .uppercase {
   text-transform: uppercase !important;
 }

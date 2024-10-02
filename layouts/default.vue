@@ -13,11 +13,11 @@ const showNavDrawer = ref(false)
 const navItems = {
   overview: {
     path: '/overview',
-    title: 'Overview',
-    items: [
-      { path: '/about', title: 'About Research Hub' },
-      { path: '/staff', title: 'Research Hub Staff' }
-    ]
+    title: 'R&A Overview'
+    // items: [
+    //   { path: '/about', title: 'About Research Hub' },
+    //   { path: '/staff', title: 'Research Hub Staff' }
+    // ]
   },
   data: {
     path: '/data',
@@ -44,7 +44,7 @@ const navItems = {
   },
   publications: {
     path: '/publications',
-    title: 'Publications',
+    title: 'Publications Browser',
     items: [
       {
         path: '/articles',
@@ -55,8 +55,8 @@ const navItems = {
         title: 'Reports'
       },
       {
-        path: '/charts',
-        title: 'Interactive Charts'
+        path: '/apps',
+        title: 'Web Applications'
       }
     ]
   },
@@ -67,6 +67,10 @@ const navItems = {
     {
         path: '/members',
         title: 'Members & Staff'
+      },
+      {
+        path: '/meetings',
+        title: 'Meetings'
       },
       {
         path: '/policies',
@@ -80,23 +84,27 @@ const navItems = {
   }
 }
 
-const breadcrumbItems = [
-  {
-    title: 'Research Hub',
-    disabled: false,
-    href: '/',
-  },
-  {
-    title: 'Data & Tools',
-    disabled: false,
-    href: 'breadcrumbs_data',
-  },
-  {
-    title: 'Data Browser',
-    disabled: false,
-    href: 'breadcrumbs_link_1',
-  }
-]
+// const breadcrumbItems = [
+//   {
+//     title: 'Research Hub',
+//     disabled: false,
+//     href: '/',
+//   },
+//   {
+//     title: 'Data & Tools',
+//     disabled: false,
+//     href: 'breadcrumbs_data',
+//   },
+//   {
+//     title: 'Data Browser',
+//     disabled: false,
+//     href: 'breadcrumbs_link_1',
+//   }
+// ]
+
+const toICJIA = () => {
+  window.location.href = 'https://icjia.illinois.gov/'
+}
 
 const pathItems = computed(() => {
   const items = route.fullPath.split('/').slice(1)
@@ -156,6 +164,8 @@ const breadcrumbsComputed = computed(() => {
       src="../assets/imgs/icjia-logo.ee010aa8.png"
       cover
       :max-width="80"
+      class="ml-1 icjia-logo"
+      @click="toICJIA"
     ></v-img>
     <!-- <span class="divider"></span> -->
     <!-- <v-list-item @click="router.push('/')" class="pa-1">
@@ -198,6 +208,10 @@ const breadcrumbsComputed = computed(() => {
 </template>
 
 <style scoped>
+.icjia-logo {
+  cursor: pointer;
+}
+
 .breadcrumbs-container {
   margin-top: 74px;
 }
