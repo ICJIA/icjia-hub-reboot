@@ -128,11 +128,12 @@ onMounted(async () => {
     <div>
       <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link>. Our work engages audiences through five intersecting approaches.</p>
     </div>
-    <div class="d-flex flex-wrap mt-10 ga-6 w-66 mx-auto">    
+    <div class="whatwedo-card-container d-flex flex-wrap mt-10 ga-6 mx-auto">    
       <v-card          
         v-for="item in whatWeDoItems"
         :key="item.title"
-        variant="tonal"
+        variant="outlined"
+        elevation="2"
         class="whatwedo-card"
       >
         <v-card-item>
@@ -154,6 +155,7 @@ onMounted(async () => {
         ></v-img> -->
       </v-card>        
     </div>
+
     <!-- <v-card flat class="mt-10 d-flex justify-center">
       <v-img
         height="100%"
@@ -169,7 +171,10 @@ onMounted(async () => {
     <div class="d-flex flex-wrap mt-10">      
       <v-btn 
         v-for="item in supportYouItems"
-        :key="item.title"variant="tonal"
+        :key="item.title"
+        variant="outlined"
+        elevation="2"
+        hover
         size="x-large"
         class="support-item"
       >
@@ -272,7 +277,7 @@ onMounted(async () => {
     </v-carousel>
 
     <div class="my-8 d-flex justify-center">
-      <v-btn size="x-large" flat class="button" color="amber-accent-4">
+      <v-btn size="x-large" elevation="2" class="button" color="amber-accent-4">
         View All
       </v-btn>
     </div>
@@ -367,12 +372,16 @@ onMounted(async () => {
   align-content: center;
 }
 
+.whatwedo-card-container {
+  max-width: 600px; 
+}
+
 .whatwedo-card {
-  max-width: 35%;
+  max-width: 48%;
 }
 
 .whatwedo-icon {
-  width: 40%;
+  width: 33%;
 }
 
 @media (max-width: 760px) {
