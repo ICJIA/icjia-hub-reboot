@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import { ref, computed } from 'vue'
-import { useDisplay } from 'vuetify'
+import { useDisplay, useGoTo } from 'vuetify'
 
 const route = useRoute()
 const router = useRouter()
@@ -9,6 +9,20 @@ const router = useRouter()
 const { smAndDown } = useDisplay()
 
 const showNavDrawer = ref(false)
+
+const goTo = useGoTo()
+const showToTop = ref(false)
+
+const onScroll = (e) => {
+  if (typeof window === 'undefined') return
+
+  const top = window.scrollY || e.target.scrollTop || 0
+  showToTop.value = top > 20
+}
+
+const toTop = () => {
+  goTo(0)
+}
 
 const navItems = {
   overview: {
@@ -205,6 +219,17 @@ const breadcrumbsComputed = computed(() => {
     </v-breadcrumbs>
   </v-container>
   <slot></slot>
+
+  <v-btn
+    v-scroll="onScroll"
+    v-show="showToTop"  
+    :fab="showToTop"      
+    position="fixed"
+    color="primary"
+    @click="toTop"
+    class="to-top-btn"
+    icon="mdi-chevron-up"
+  />
 </template>
 
 <style scoped>
@@ -229,6 +254,12 @@ const breadcrumbsComputed = computed(() => {
   height: 66px;
   background-color: var(--clr-dark-500);
   margin: 0 1.3rem 0 2rem;
+}
+
+.to-top-btn {
+  bottom: 2rem;
+  right: 2rem;
+  background-color: var(--clr-primary-400) !important;
 }
 </style>
 
