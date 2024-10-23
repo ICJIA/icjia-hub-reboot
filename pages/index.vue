@@ -23,27 +23,27 @@ const whatWeDoItems = [
   {
     title: 'Evaluation',
     text: 'Evaluate government and community programs, providing support and advisement to program staff',
-    icon: 'grid-icon.png'
+    icon: 'mdi-eye-outline'
   },
   {
     title: 'Data',
     text: 'Make datasets from multiple justice system sectors available in a single location.',
-    icon: 'grid-icon.png'
+    icon: 'mdi-archive-outline'
   },
   {
     title: 'Engagement',
     text: 'Disseminate reports and dashboards that provide relevant justice system metrics',
-    icon: 'grid-icon.png'
+    icon: 'mdi-handshake-outline'
   },
   {
     title: 'Analytics',
     text: 'Host events that engage experts on important justice system topics',
-    icon: 'grid-icon.png'
+    icon: 'mdi-chart-box-outline'
   },
   {
     title: 'Evidence',
     text: 'Summarize research on justiced system topics, highlighting results with the strongest evidence',
-    icon: 'grid-icon.png'
+    icon: 'mdi-scale-unbalanced'
   }
 ]
 
@@ -127,48 +127,72 @@ onMounted(async () => {
       We are the Illinois Criminal Justice Information Authority's Research & Analysis Unit. We support persons interested in the Illinois justice system by making data and research publications publicly available. Our work supports multiple audiences, including policymakers, community agencies, researchers, and the general public. We invite you to explore Research Hub, our platform for making data and research publicly available, and learn how we can help.
     </p>   
   </v-container>
-  <v-container fluid class="about pa-15">
+  <v-container fluid class="about pa-15 whatwedo-section">
     <h1 class="text-h4">What We Do</h1>
     <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
-    <div>
-      <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link>. Our work engages audiences through five intersecting approaches.</p>
-    </div>
-    <div class="whatwedo-card-container d-flex flex-wrap mt-10 ga-6 mx-auto">    
-      <v-card          
-        v-for="item in whatWeDoItems"
-        :key="item.title"
-        variant="outlined"
-        elevation="2"
-        class="whatwedo-card"
-      >
-        <v-card-item>
-          <div class="text-uppercase text-h6 mb-1 text-center">
-            {{ item.title }}
-          </div>
-          <div class="d-flex">
-            <v-img :src="item.icon" class="whatwedo-icon"></v-img>
-            <div class="ml-2 text-body-2 mt-3">
-              {{ item.text }}
+    <div class="split">
+      <div class="whatwedo-left">
+        <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link> organized to cover a wide variety of topics that span the justice system. Our work engages audiences through five intersecting approaches and our areas of specialization include:</p>
+        <ul class="ml-4 mt-6">
+          <li>
+            Violent crime prevention and intervention
+          </li>
+          <li>
+            Crime victimization
+          </li>
+          <li>
+            Community investment in alternatives to prison
+          </li>
+        </ul>
+      </div>
+      <div class="whatwedo-right">
+        <v-card          
+          v-for="item in whatWeDoItems"
+          :key="item.title"
+          elevation="10"
+          class="whatwedo-card"
+        >
+          <v-card-item>
+            <div class="text-h5 my-3 text-center color-primary">
+              {{ item.title }}
             </div>
-          </div>
-        </v-card-item>
-        <!-- <v-img
-          height="100%"
-          src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-          cover
-          :max-width="750"
-        ></v-img> -->
-      </v-card>        
+            <div class="whatwedo-card-content">
+              <!-- <v-img :src="item.icon" class="whatwedo-icon"></v-img> -->
+              <v-icon :icon="item.icon" size="70" class="whatwedo-icon"></v-icon>
+              <div class="ml-2 text-body-2 mt-3">
+                {{ item.text }}
+              </div>
+            </div>
+          </v-card-item>
+          <!-- <v-img
+            height="100%"
+            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+            cover
+            :max-width="750"
+          ></v-img> -->
+        </v-card>   
+      </div>
     </div>
+  </v-container>
 
-    <!-- <v-card flat class="mt-10 d-flex justify-center">
-      <v-img
-        height="100%"
-        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-        cover
-        :max-width="750"
-      ></v-img>
-    </v-card> -->
+  <v-divider class="color-primary mt-2 mb-8" width="50%" thickness="3" opacity="100%"></v-divider>
+
+  <v-container fluid class="about pa-15 whatwedo-section2">
+    <div class="split">
+      <div class="whatwedo2-left">
+        <v-img
+          height="100%"
+          src="../assets/imgs/pexels-tima-miroshnichenko-6615239.jpg"
+          cover
+          width="850"
+        ></v-img>
+      </div>
+      <div class="whatwedo2-right">
+        <p>
+          Our Center for Criminal Justice Data and Analytics maintains statewide data tables, making them available to the public and developing interactive dashboards.
+        </p>
+      </div>
+    </div>
   </v-container>
 
   <v-container fluid class="latest-articles pa-0">
@@ -386,6 +410,10 @@ onMounted(async () => {
   max-width: 50%;
 }
 
+.support-you {
+  
+}
+
 .support-item {
   flex: 1 0 40%;
   margin: 1rem;
@@ -394,16 +422,72 @@ onMounted(async () => {
   align-content: center;
 }
 
+.whatwedo-section {
+  
+}
+
 .whatwedo-card-container {
-  max-width: 600px; 
+  max-width: 850px;
+  background-color: rgb(238, 238, 238);
 }
 
 .whatwedo-card {
-  max-width: 48%;
+  max-width: 30%;
+}
+
+.whatwedo-card-content {
+  display: flex;
+  align-items: center;
 }
 
 .whatwedo-icon {
-  width: 33%;
+  /* width: 33%; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split {
+  display: flex;
+}
+
+.whatwedo-left {  
+  max-width: 35%;  
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center; */
+}
+
+.whatwedo-right {
+  max-width: 65%;
+  margin-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(238, 238, 238);
+  gap: 5% 5%;
+  padding: 1.75rem 1.75rem;
+  height: 550px;
+}
+
+.whatwedo2-left {  
+  max-width: 65%;  
+  margin-right: 2rem;
+}
+
+.whatwedo2-right {
+  max-width: 35%;
+  /* display: flex;
+  align-items: center; */
+}
+
+@media (max-width: 1510px) {
+  .whatwedo-card {
+    max-width: 47%;
+  }
+
+  .whatwedo-right {    
+    height: 650px;
+  }
 }
 
 @media (max-width: 760px) {
