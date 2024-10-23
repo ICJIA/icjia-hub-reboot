@@ -26,13 +26,6 @@ const toTop = () => {
   goTo(0)
 }
 
-const icons = [
-  'mdi-facebook',
-  'mdi-twitter',
-  'mdi-linkedin',
-  'mdi-instagram',
-]
-
 const navItems = {
   overview: {
     path: '/overview',
@@ -186,7 +179,7 @@ const breadcrumbsComputed = computed(() => {
       height="100%"
       src="../assets/imgs/icjia-logo.ee010aa8.png"
       cover
-      :max-width="80"
+      max-width="80"
       class="ml-1 icjia-logo"
       @click="toICJIA"
     ></v-img>

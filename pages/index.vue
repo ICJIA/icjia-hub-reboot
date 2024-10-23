@@ -114,16 +114,21 @@ onMounted(async () => {
       <div class="text-h6 mb-10 text-white">
         Data. Research. Knowledge.
       </div>    
-      <p class="text-start text-white px-10">
-        We are the Illinois Criminal Justice Information Authority's Research & Analysis Unit. We support persons interested in the Illinois justice system by making data and research publications publicly available. Our work supports multiple audiences, including policymakers, community agencies, researchers, and the general public. We invite you to explore Research Hub, our platform for making data and research publicly available, and learn how we can help.
-      </p>   
     </div>   
     <!-- <div class="v-bg position-absolute top-0 right-0 left-0 bottom-0">
       <div aria-hidden="true" class="overflow-hidden opacity-20 w-100 h-100" />
     </div> -->
   </v-container>
+  <v-container fluid class="px-15 pb-15 pt-10 subheader">
+    <h1 class="text-h3">Research Hub</h1>
+    <!-- <v-divider class="color-primary mt-5 mb-11" thickness="3" opacity="100%"></v-divider> -->
+
+    <p class="mt-5">
+      We are the Illinois Criminal Justice Information Authority's Research & Analysis Unit. We support persons interested in the Illinois justice system by making data and research publications publicly available. Our work supports multiple audiences, including policymakers, community agencies, researchers, and the general public. We invite you to explore Research Hub, our platform for making data and research publicly available, and learn how we can help.
+    </p>   
+  </v-container>
   <v-container fluid class="about pa-15">
-    <h1 class="uppercase">What We Do</h1>
+    <h1 class="text-h4">What We Do</h1>
     <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
     <div>
       <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link>. Our work engages audiences through five intersecting approaches.</p>
@@ -167,7 +172,7 @@ onMounted(async () => {
   </v-container>
 
   <v-container fluid class="latest-articles pa-0">
-    <h1 class="uppercase mx-15 mt-15">Latest Research and Data</h1>
+    <h1 class="text-h4 mx-15 mt-15">Latest Research and Data</h1>
     <v-divider class="color-primary mt-2 mb-8 mx-15" thickness="3" opacity="100%"></v-divider>
     <!-- <v-row class="mt-4">
       <v-col v-for="n in 2" cols="12" md="6">
@@ -245,16 +250,16 @@ onMounted(async () => {
       </v-carousel-item> -->
     </v-carousel>
 
-    <div class="my-8 d-flex justify-center">
+    <!-- <div class="my-8 d-flex justify-center">
       <v-btn size="x-large" elevation="2" class="button" color="amber-accent-4">
         View All
       </v-btn>
-    </div>
+    </div> -->
   </v-container>
 
   <v-container fluid class="support-you pa-15">
-    <h1 class="uppercase">See How We Can Support You</h1>
-    <v-divider class="color-primary mt-2 mb-8" thickness="3"></v-divider>
+    <h1 class="text-h4">See How We Can Support You</h1>
+    <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
     <div class="d-flex flex-wrap mt-10">      
       <v-btn 
         v-for="item in supportYouItems"
@@ -301,12 +306,14 @@ onMounted(async () => {
     ></v-img>
   </v-container> -->
   <v-container fluid class="contact-us pa-15">
-    <h1 class="uppercase">Let's Stay in Touch</h1>
+    <h1 class="text-h4">Let's Stay in Touch</h1>
     <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
     <div>
       <p class="mt-4">For inquiries, contact the Research & Analysis Unit at 
         <a href="mailto:placeholder@illinois.gov?subject=stay%in%touch" class="ext-link">placeholder@illinois.gov</a>
       </p>
+      <br/>
+      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
     </div>
     <!-- <form class="contact-form">
       <v-text-field
@@ -349,12 +356,24 @@ onMounted(async () => {
 
 <style scoped>
 .header {
-  background: url('../assets/imgs/scott-graham-5fNmWej4tAA-unsplash.jpg');
+  background-image:
+    linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.1), 
+      rgba(0, 0, 0, 0.3)
+      /* rgba(255, 0, 0, 0.75),
+      rgba(0, 4, 8, 0.75)),  */
+    ), url('../assets/imgs/scott-graham-5fNmWej4tAA-unsplash.jpg');  
+  /* background: url('../assets/imgs/scott-graham-5fNmWej4tAA-unsplash.jpg'); */
   background-size: cover;
   margin-top: 72px;
   min-height: 600px;
   border-top: 12px solid var(--clr-primary);
   border-bottom: 12px solid var(--clr-primary);
+}
+
+.subheader {
+  background-color: rgb(238, 238, 238);
 }
 
 .data-browser {
