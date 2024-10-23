@@ -3,6 +3,8 @@ import { onMounted } from 'vue';
 import { ref, computed } from 'vue'
 import { useDisplay, useGoTo } from 'vuetify'
 
+import AppFooter from '~/components/AppFooter.vue';
+
 const route = useRoute()
 const router = useRouter()
 
@@ -23,6 +25,13 @@ const onScroll = (e) => {
 const toTop = () => {
   goTo(0)
 }
+
+const icons = [
+  'mdi-facebook',
+  'mdi-twitter',
+  'mdi-linkedin',
+  'mdi-instagram',
+]
 
 const navItems = {
   overview: {
@@ -220,15 +229,17 @@ const breadcrumbsComputed = computed(() => {
   </v-container>
   <slot></slot>
 
+  <AppFooter />
+
   <v-btn
     v-scroll="onScroll"
     v-show="showToTop"  
-    :fab="showToTop"      
     position="fixed"
     color="primary"
     @click="toTop"
     class="to-top-btn"
     icon="mdi-chevron-up"
+    size="large"
   />
 </template>
 
@@ -260,6 +271,7 @@ const breadcrumbsComputed = computed(() => {
   bottom: 2rem;
   right: 2rem;
   background-color: var(--clr-primary-400) !important;
+  z-index: 9999;
 }
 </style>
 

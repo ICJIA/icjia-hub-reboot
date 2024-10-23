@@ -124,7 +124,7 @@ onMounted(async () => {
   </v-container>
   <v-container fluid class="about pa-15">
     <h1 class="uppercase">What We Do</h1>
-    <v-divider class="mt-2 mb-8"></v-divider>
+    <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
     <div>
       <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link>. Our work engages audiences through five intersecting approaches.</p>
     </div>
@@ -165,41 +165,10 @@ onMounted(async () => {
       ></v-img>
     </v-card> -->
   </v-container>
-  <v-container fluid class="support-you pa-15">
-    <h1 class="uppercase">See How We Can Support You</h1>
-    <v-divider class="mt-2 mb-8"></v-divider>
-    <div class="d-flex flex-wrap mt-10">      
-      <v-btn 
-        v-for="item in supportYouItems"
-        :key="item.title"
-        variant="outlined"
-        elevation="2"
-        hover
-        size="x-large"
-        class="support-item"
-      >
-        {{ item.title }}      
-      </v-btn>
-    </div>
-  </v-container>
-  <!-- <v-container fluid class="covering pa-15">
-    <h1 class="uppercase">Covering the Criminal Justice System Spectrum</h1>
-    <v-divider class="mt-2 mb-8"></v-divider>
-    <div>
-      <p class="mt-4">Proin dictum purus in lacinia mollis. Cras vitae ultrices ligula. Nulla feugiat ipsum sed tellus vehicula, ac imperdiet tellus bibendum. Vivamus eget vestibulum mauris. Vivamus arcu odio, eleifend eget odio a, lacinia sollicitudin neque. Mauris nisi lorem, aliquet vitae velit id, faucibus tempus orci. Maecenas a urna lorem. Aenean maximus sem a massa feugiat tempor. Proin tortor dolor, feugiat eu felis in, consequat efficitur nisi.</p>
-    </div>
-    <v-card flat class="mt-10 d-flex justify-center">
-      <v-img
-        height="100%"
-        src="../assets/imgs/pexels-tima-miroshnichenko-6615239.jpg"
-        cover
-        :max-width="750"
-      ></v-img>
-    </v-card>
-  </v-container> -->
+
   <v-container fluid class="latest-articles pa-0">
     <h1 class="uppercase mx-15 mt-15">Latest Research and Data</h1>
-    <v-divider class="mt-2 mb-8 mx-15"></v-divider>
+    <v-divider class="color-primary mt-2 mb-8 mx-15" thickness="3" opacity="100%"></v-divider>
     <!-- <v-row class="mt-4">
       <v-col v-for="n in 2" cols="12" md="6">
         <v-card flat class="pb-3">
@@ -282,6 +251,40 @@ onMounted(async () => {
       </v-btn>
     </div>
   </v-container>
+
+  <v-container fluid class="support-you pa-15">
+    <h1 class="uppercase">See How We Can Support You</h1>
+    <v-divider class="color-primary mt-2 mb-8" thickness="3"></v-divider>
+    <div class="d-flex flex-wrap mt-10">      
+      <v-btn 
+        v-for="item in supportYouItems"
+        :key="item.title"
+        variant="outlined"
+        elevation="2"
+        hover
+        size="x-large"
+        class="support-item"
+      >
+        {{ item.title }}      
+      </v-btn>
+    </div>
+  </v-container>
+  <!-- <v-container fluid class="covering pa-15">
+    <h1 class="uppercase">Covering the Criminal Justice System Spectrum</h1>
+    <v-divider class="mt-2 mb-8"></v-divider>
+    <div>
+      <p class="mt-4">Proin dictum purus in lacinia mollis. Cras vitae ultrices ligula. Nulla feugiat ipsum sed tellus vehicula, ac imperdiet tellus bibendum. Vivamus eget vestibulum mauris. Vivamus arcu odio, eleifend eget odio a, lacinia sollicitudin neque. Mauris nisi lorem, aliquet vitae velit id, faucibus tempus orci. Maecenas a urna lorem. Aenean maximus sem a massa feugiat tempor. Proin tortor dolor, feugiat eu felis in, consequat efficitur nisi.</p>
+    </div>
+    <v-card flat class="mt-10 d-flex justify-center">
+      <v-img
+        height="100%"
+        src="../assets/imgs/pexels-tima-miroshnichenko-6615239.jpg"
+        cover
+        :max-width="750"
+      ></v-img>
+    </v-card>
+  </v-container> -->
+
   <!-- <v-container fluid class="data-browser px-15 pt-15 pb-0 d-flex ga-4 align-center">
     <div>
       <h1>Data Browser</h1>
@@ -299,13 +302,13 @@ onMounted(async () => {
   </v-container> -->
   <v-container fluid class="contact-us pa-15">
     <h1 class="uppercase">Let's Stay in Touch</h1>
-    <v-divider class="mt-2 mb-8"></v-divider>
+    <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
     <div>
       <p class="mt-4">For inquiries, contact the Research & Analysis Unit at 
         <a href="mailto:placeholder@illinois.gov?subject=stay%in%touch" class="ext-link">placeholder@illinois.gov</a>
       </p>
     </div>
-    <form class="contact-form">
+    <!-- <form class="contact-form">
       <v-text-field
         v-model="state.name"
         :counter="10"
@@ -340,7 +343,7 @@ onMounted(async () => {
       >
         Submit
       </v-btn>
-    </form>
+    </form> -->
   </v-container>
 </template>
 

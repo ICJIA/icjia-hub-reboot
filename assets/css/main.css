@@ -3,7 +3,9 @@
   --clr-primary-300: hsl(215, 100%, 73%); */
   --clr-primary-light: hsl(206.51, 81.13%, 95%);
   --clr-primary-400: hsl(206.51, 81.13%, 30%);
-  --clr-primary: hsl(206.51, 81.13%, 20.78%);
+  /* --clr-primary: hsl(206.51, 81.13%, 20.78%); */
+  --clr-primary: hsl(208, 79.8%, 25.3%);
+  /* --clr-primary: rgb(13, 68, 116); */
 
   --clr-dark-400: hsl(0, 0%, 75%);
   --clr-dark-500: hsl(0, 0%, 55%);
@@ -52,7 +54,11 @@
 }
 
 .color-primary {
-  color: var(--clr-primary)
+  color: var(--clr-primary) !important;
+}
+
+.bg-color-primary {
+  background-color: var(--clr-primary) !important;
 }
 
 .uppercase {
