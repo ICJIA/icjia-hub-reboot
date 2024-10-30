@@ -4,10 +4,19 @@ import { useDisplay } from 'vuetify'
 import { useRouter } from '#vue-router'
 
 import { useArticleStore } from '@/stores/article'
+import dayjs from 'dayjs'
+import localizedFormat from 'dayjs/plugin/localizedFormat'
+dayjs.extend(localizedFormat)
 
 const articleStore = useArticleStore()
 
 const router = useRouter()
+
+const getReadableDate = (isoDate) => {
+  return dayjs(isoDate).format('ll')
+}
+
+const uploadsUrl = 'https://hub.icjia-api.cloud'
 
 const { smAndDown } = useDisplay()
 
@@ -51,18 +60,22 @@ const supportYouItems = [
   {
     title: 'For Researchers',
     path: '/',
+    icon: 'mdi-account-eye'
   },
   {
     title: 'For Community Agencies',
     path: '/',
+    icon: 'mdi-office-building'
   },
   {
     title: 'For Policymakers',
     path: '/',
+    icon: 'mdi-human-male-board-poll'
   },
   {
     title: 'For the Public',
     path: '/',
+    icon: 'mdi-account-group'
   },
 ]
 
@@ -145,17 +158,21 @@ onMounted(async () => {
         </v-card>
       </v-col>
     </v-row> -->
+
     <v-carousel v-if="latestArticles.length" class="mt-4" cycle>
       <v-carousel-item
         v-for="item in latestArticles"
-        src="https://cdn.vuetifyjs.com/images/cards/hotel.jpg"
+        :src="`${uploadsUrl}${item.attributes.splash.data.attributes.url}`"
         :key="item.attributes.id"
-        cover        
+        cover  
       >
-        <div class="d-flex fill-height justify-center align-center">
-          <div class="text-h3 text-white pa-15 mx-10 font-weight-bold">
-            {{ item.attributes.title }}
+        <div class="d-flex flex-column fill-height justify-center align-center">
+          <div class="text-h6 text-white">
+            {{ getReadableDate(item.attributes.date) }}
           </div>
+          <div class="text-h4 text-white px-15 mt-5 mx-10 font-weight-bold">
+            {{ item.attributes.title }}
+          </div>   
         </div>
       </v-carousel-item>
       <!-- <v-carousel-item
@@ -213,7 +230,7 @@ onMounted(async () => {
       </v-btn>
     </div> -->
   </v-container>
-  
+
   <v-container fluid class="about pa-15 whatwedo-section">
     <h1 class="text-h4">What We Do</h1>
     <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
@@ -288,6 +305,7 @@ onMounted(async () => {
     <div class="d-flex flex-wrap mt-10">      
       <v-btn 
         v-for="item in supportYouItems"
+        :prepend-icon="item.icon"
         :key="item.title"
         variant="outlined"
         elevation="2"
@@ -337,8 +355,6 @@ onMounted(async () => {
       <p class="mt-4">For inquiries, contact the Research & Analysis Unit at 
         <a href="mailto:placeholder@illinois.gov?subject=stay%in%touch" class="ext-link">placeholder@illinois.gov</a>
       </p>
-      <br/>
-      <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
     </div>
     <!-- <form class="contact-form">
       <v-text-field

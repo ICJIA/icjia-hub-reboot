@@ -5,7 +5,7 @@ const baseUrl = 'https://hub.icjia-api.cloud/api'
 const actions = {  
   async listArticles () {
     try {  
-      const response: AxiosResponse = await axios.get(`${baseUrl}/articles`)
+      const response: AxiosResponse = await axios.get(`${baseUrl}/articles?populate=*`)
       const { data } = response
       if (data) {
         return data
