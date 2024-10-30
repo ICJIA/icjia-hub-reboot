@@ -127,73 +127,6 @@ onMounted(async () => {
       We are the Illinois Criminal Justice Information Authority's Research & Analysis Unit. We support persons interested in the Illinois justice system by making data and research publications publicly available. Our work supports multiple audiences, including policymakers, community agencies, researchers, and the general public. We invite you to explore Research Hub, our platform for making data and research publicly available, and learn how we can help.
     </p>   
   </v-container>
-  <v-container fluid class="about pa-15 whatwedo-section">
-    <h1 class="text-h4">What We Do</h1>
-    <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
-    <div class="split">
-      <div class="whatwedo-left">
-        <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link> organized to cover a wide variety of topics that span the justice system. Our work engages audiences through five intersecting approaches and our areas of specialization include:</p>
-        <ul class="ml-4 mt-6">
-          <li>
-            Violent crime prevention and intervention
-          </li>
-          <li>
-            Crime victimization
-          </li>
-          <li>
-            Community investment in alternatives to prison
-          </li>
-        </ul>
-      </div>
-      <div class="whatwedo-right">
-        <v-card          
-          v-for="item in whatWeDoItems"
-          :key="item.title"
-          elevation="10"
-          class="whatwedo-card"
-        >
-          <v-card-item>
-            <div class="text-h5 my-3 text-center color-primary">
-              {{ item.title }}
-            </div>
-            <div class="whatwedo-card-content">
-              <!-- <v-img :src="item.icon" class="whatwedo-icon"></v-img> -->
-              <v-icon :icon="item.icon" size="70" class="whatwedo-icon"></v-icon>
-              <div class="ml-2 text-body-2 mt-3">
-                {{ item.text }}
-              </div>
-            </div>
-          </v-card-item>
-          <!-- <v-img
-            height="100%"
-            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-            cover
-            :max-width="750"
-          ></v-img> -->
-        </v-card>   
-      </div>
-    </div>
-  </v-container>
-
-  <v-divider class="color-primary mt-2 mb-8" width="50%" thickness="3" opacity="100%"></v-divider>
-
-  <v-container fluid class="about pa-15 whatwedo-section2">
-    <div class="split">
-      <div class="whatwedo2-left">
-        <v-img
-          height="100%"
-          src="../assets/imgs/pexels-tima-miroshnichenko-6615239.jpg"
-          cover
-          width="850"
-        ></v-img>
-      </div>
-      <div class="whatwedo2-right">
-        <p>
-          Our Center for Criminal Justice Data and Analytics maintains statewide data tables, making them available to the public and developing interactive dashboards.
-        </p>
-      </div>
-    </div>
-  </v-container>
 
   <v-container fluid class="latest-articles pa-0">
     <h1 class="text-h4 mx-15 mt-15">Latest Research and Data</h1>
@@ -279,6 +212,74 @@ onMounted(async () => {
         View All
       </v-btn>
     </div> -->
+  </v-container>
+  
+  <v-container fluid class="about pa-15 whatwedo-section">
+    <h1 class="text-h4">What We Do</h1>
+    <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
+    <div class="split">
+      <div class="whatwedo-left">
+        <p class="mt-4">The Research & Analysis Unit is composed of <router-link to="overview">six research centers</router-link> organized to cover a wide variety of topics that span the justice system. Our work engages audiences through five intersecting approaches and our areas of specialization include:</p>
+        <ul class="ml-4 mt-6">
+          <li>
+            Violent crime prevention and intervention
+          </li>
+          <li>
+            Crime victimization
+          </li>
+          <li>
+            Community investment in alternatives to prison
+          </li>
+        </ul>
+      </div>
+      <div class="whatwedo-right">
+        <v-card          
+          v-for="item in whatWeDoItems"
+          :key="item.title"
+          elevation="10"
+          class="whatwedo-card"
+        >
+          <v-card-item>
+            <div class="text-h5 my-3 text-center color-primary">
+              {{ item.title }}
+            </div>
+            <div class="whatwedo-card-content">
+              <!-- <v-img :src="item.icon" class="whatwedo-icon"></v-img> -->
+              <v-icon :icon="item.icon" size="70" class="whatwedo-icon"></v-icon>
+              <div class="ml-2 text-body-2 mt-3">
+                {{ item.text }}
+              </div>
+            </div>
+          </v-card-item>
+          <!-- <v-img
+            height="100%"
+            src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+            cover
+            :max-width="750"
+          ></v-img> -->
+        </v-card>   
+      </div>
+    </div>
+  </v-container>
+
+  <v-divider class="color-primary mt-2 mb-8" width="50%" thickness="3" opacity="100%"></v-divider>
+
+  <v-container fluid class="about pa-15 whatwedo-section2">
+    <div class="split">
+      <div class="whatwedo2-left">
+        <v-img
+          height="100%"
+          src="../assets/imgs/pexels-tima-miroshnichenko-6615239.jpg"
+          cover
+          width="850"
+        ></v-img>
+      </div>
+      <div class="whatwedo2-right">
+        <p>
+          Our Center for Criminal Justice Data and Analytics maintains statewide data tables, making them available to the public and developing interactive dashboards.
+        </p>
+      </div>
+    </div>
   </v-container>
 
   <v-container fluid class="support-you pa-15">

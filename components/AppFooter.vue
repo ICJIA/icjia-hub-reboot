@@ -19,13 +19,22 @@
     </div>
 
     <div class="mb-4">
-      <v-btn
+      <v-tooltip 
         v-for="icon in icons"
-        :key="icon"
-        :icon="icon"
-        class="mx-4"
-        variant="text"
-      ></v-btn>
+        :key="icon.icon"
+        :text="icon.tooltip"
+        location="top"
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn
+            v-bind="props"
+            :icon="icon.icon"
+            class="mx-4"
+            variant="text"
+            @click="toSocial(icon.link)"
+          ></v-btn>
+        </template>
+      </v-tooltip>
     </div>
 
     <!-- <div class="pt-0">
@@ -129,11 +138,15 @@ const toICJIA = () => {
   window.location.href = 'https://icjia.illinois.gov/'
 }
 
+const toSocial = (link) => {
+  window.open(link, '_blank').focus()
+}
+
 const icons = [
-  'mdi-facebook',
-  'mdi-twitter',
-  'mdi-linkedin',
-  'mdi-instagram',
+  { icon: 'mdi-facebook', 'link': 'https://www.facebook.com/ICJIA/', tooltip: 'ICJIA on Facebook' },
+  { icon: 'mdi-youtube', 'link': 'https://www.youtube.com/c/illinoiscriminaljusticeinformationauthority', tooltip: 'ICJIA on Youtube' },
+  { icon: 'mdi-instagram', 'link': 'https://www.instagram.com/icjia_illinois/', tooltip: 'ICJIA on Instagram' },
+  { icon: 'mdi-linkedin', 'link': 'https://www.linkedin.com/company/icjia/', tooltip: 'ICJIA on Linkedin' }
 ]
 </script>
 
