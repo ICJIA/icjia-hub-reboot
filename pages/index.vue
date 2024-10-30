@@ -299,23 +299,42 @@ onMounted(async () => {
     </div>
   </v-container>
 
-  <v-container fluid class="support-you pa-15">
+  <v-container fluid class="support-you-title px-15 pt-15">
     <h1 class="text-h4">See How We Can Support You</h1>
-    <v-divider class="color-primary mt-2 mb-8" thickness="3" opacity="100%"></v-divider>
-    <div class="d-flex flex-wrap mt-10">      
-      <v-btn 
-        v-for="item in supportYouItems"
-        :prepend-icon="item.icon"
-        :key="item.title"
-        variant="outlined"
-        elevation="2"
-        hover
-        size="x-large"
-        class="support-item"
-      >
-        {{ item.title }}      
-      </v-btn>
-    </div>
+    <v-divider class="color-primary mt-2" thickness="3" opacity="100%"></v-divider>    
+  </v-container>
+
+  <v-container fluid class="support-you-content d-flex flex-wrap mt-4">
+    <v-card          
+      v-for="item in supportYouItems"
+      :key="item.title"
+      elevation="10"
+    >
+      <v-card-item>
+        <v-icon :icon="item.icon" size="50"></v-icon>
+        <div class="ml-2 text-body-2 mt-3">
+          {{ item.title }}
+        </div>
+      </v-card-item>
+      <!-- <v-img
+        height="100%"
+        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
+        cover
+        :max-width="750"
+      ></v-img> -->
+    </v-card>   
+    <!-- <v-btn 
+      v-for="item in supportYouItems"
+      :prepend-icon="item.icon"
+      :key="item.title"
+      variant="outlined"
+      elevation="2"
+      hover
+      size="x-large"
+      class="support-item"
+    >
+      {{ item.title }}      
+    </v-btn> -->
   </v-container>
   <!-- <v-container fluid class="covering pa-15">
     <h1 class="uppercase">Covering the Criminal Justice System Spectrum</h1>
@@ -427,9 +446,27 @@ onMounted(async () => {
   max-width: 50%;
 }
 
-.support-you {
-  
+.support-you-content {
+  background-size: cover;
+  background-color: rgb(238, 238, 238);
 }
+
+.support-you-items {
+  background-color: rgb(238, 238, 238);
+  padding: 1.75rem 1.75rem;
+}
+
+/* .whatwedo-right {
+  max-width: 65%;
+  margin-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: rgb(238, 238, 238);
+  gap: 5% 5%;
+
+  height: 550px;
+} */
+
 
 .support-item {
   flex: 1 0 40%;
