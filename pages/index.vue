@@ -309,32 +309,15 @@ onMounted(async () => {
       v-for="item in supportYouItems"
       :key="item.title"
       elevation="10"
+      class="support-you-item"
     >
-      <v-card-item>
+      <v-card-item class="text-center">
         <v-icon :icon="item.icon" size="50"></v-icon>
-        <div class="ml-2 text-body-2 mt-3">
+        <div class="ml-2 text-body-1 mt-3">
           {{ item.title }}
         </div>
       </v-card-item>
-      <!-- <v-img
-        height="100%"
-        src="https://cdn.vuetifyjs.com/images/parallax/material.jpg"
-        cover
-        :max-width="750"
-      ></v-img> -->
     </v-card>   
-    <!-- <v-btn 
-      v-for="item in supportYouItems"
-      :prepend-icon="item.icon"
-      :key="item.title"
-      variant="outlined"
-      elevation="2"
-      hover
-      size="x-large"
-      class="support-item"
-    >
-      {{ item.title }}      
-    </v-btn> -->
   </v-container>
   <!-- <v-container fluid class="covering pa-15">
     <h1 class="uppercase">Covering the Criminal Justice System Spectrum</h1>
@@ -449,31 +432,28 @@ onMounted(async () => {
 .support-you-content {
   background-size: cover;
   background-color: rgb(238, 238, 238);
+  padding: 5rem 1.75rem;
+  justify-content: space-evenly;
 }
 
-.support-you-items {
-  background-color: rgb(238, 238, 238);
-  padding: 1.75rem 1.75rem;
-}
-
-/* .whatwedo-right {
-  max-width: 65%;
-  margin-left: 2rem;
+.support-you-item {
   display: flex;
-  flex-wrap: wrap;
-  background-color: rgb(238, 238, 238);
-  gap: 5% 5%;
+  padding: 1.75rem 1.75rem;
+  width: 20%;
+  justify-content: center;
+  cursor: pointer;
+}
 
-  height: 550px;
-} */
+@media (max-width: 1100px) {
+  .support-you-item  {
+    width: 40%;
+    margin-bottom: 1.5rem;
+  }
+}
 
-
-.support-item {
-  flex: 1 0 40%;
-  margin: 1rem;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-  align-content: center;
+.support-you-item:hover {
+  background-color: #777;
+  color: #efefef;
 }
 
 .whatwedo-section {
@@ -541,12 +521,6 @@ onMounted(async () => {
 
   .whatwedo-right {    
     height: 650px;
-  }
-}
-
-@media (max-width: 760px) {
-  .support-item {
-    flex: 1 0 100%;
   }
 }
 </style>
