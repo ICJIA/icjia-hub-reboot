@@ -8,7 +8,7 @@ import AppFooter from '~/components/AppFooter.vue';
 const route = useRoute()
 const router = useRouter()
 
-const { smAndDown } = useDisplay()
+const { smAndDown, mdAndUp } = useDisplay()
 
 const showNavDrawer = ref(false)
 
@@ -175,22 +175,26 @@ const breadcrumbsComputed = computed(() => {
       <v-app-bar-nav-icon @click="showNavDrawer = !showNavDrawer"></v-app-bar-nav-icon>
     </template>    
     
-    <v-img
-      height="100%"
-      src="../assets/imgs/icjia-logo.ee010aa8.png"
-      cover
-      max-width="80"
-      class="ml-1 icjia-logo"
-      @click="toICJIA"
-    ></v-img>
-    <!-- <span class="divider"></span> -->
-    <!-- <v-list-item @click="router.push('/')" class="pa-1">
-      <h4 class="uppercase hub-text">Research Hub</h4>
-    </v-list-item> -->
-    <h4 @click="router.push('/')" class="uppercase hub-text">Research Hub</h4>
-    <v-spacer></v-spacer>
+    <div class="d-flex align-center">
+      <v-img
+        height="100%"
+        src="../assets/imgs/icjia-logo.ee010aa8.png"
+        cover
+        width="80"
+        class="ml-1 icjia-logo"
+        @click="toICJIA"
+      ></v-img>
+      <!-- <span class="divider"></span> -->
+      <!-- <v-list-item @click="router.push('/')" class="pa-1">
+        <h4 class="uppercase hub-text">Research Hub</h4>
+      </v-list-item> -->
+      <h4 @click="router.push('/')" class="uppercase hub-text">Research Hub</h4>
+    </div>
+
+    <v-spacer v-if="mdAndUp"></v-spacer>
 
     <v-menu
+      v-if="mdAndUp"
       v-for="item in navItems"
       :key="item.path"
       open-on-hover
@@ -246,11 +250,17 @@ const breadcrumbsComputed = computed(() => {
 }
 
 .hub-text {
-  margin-left: 1rem;
+  /* margin-left: 1rem; */
   padding: .5rem .75rem;
   /* box-shadow: 0 0 5px rgb(29 26 26 / 65%); */
-  box-shadow: -5px 0 2px -3px rgb(29 26 26 / 65%);
+  /* box-shadow: -5px 0 2px -3px rgb(29 26 26 / 65%); */
   cursor: pointer;
+  text-decoration: underline;
+}
+
+@media (max-width: 960px) {
+  .hub-text   {
+  }
 }
 
 .divider {
