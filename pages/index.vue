@@ -98,10 +98,16 @@ const items = [
 ]
 
 const latestArticles = computed(() => {
-  if (!articleStore.articles.length) return []
+  if (!articleStore.articles.length) return [] 
 
   return articleStore.articles.slice(0, 5)
 })
+
+const formatAuthors = (authors) => {
+  if (!authors || !authors.length) return ''
+
+  return authors.map(author => author.title).join(', ')
+}
 
 onMounted(async () => {
   await articleStore.loadArticles()
@@ -162,17 +168,23 @@ onMounted(async () => {
     <v-carousel v-if="latestArticles.length" class="mt-4" cycle>
       <v-carousel-item
         v-for="item in latestArticles"
-        :src="`${uploadsUrl}${item.attributes.splash.data.attributes.url}`"
+        :src="`${uploadsUrl}${item.attributes.splash.data?.attributes.url}`"
         :key="item.attributes.id"
         cover  
       >
-        <div class="d-flex flex-column fill-height justify-center align-center">
-          <div class="text-h6 text-white">
+        <div class="gradient-overlay"></div>
+        
+        <div class="d-flex flex-column fill-height justify-center align-center carousel-content text-center pt-15">
+          <div class="text-h6 font-weight-bold text-white">
             {{ getReadableDate(item.attributes.date) }}
           </div>
           <div class="text-h4 text-white px-15 mt-5 mx-10 font-weight-bold">
             {{ item.attributes.title }}
           </div>   
+          <hr class="carousel-divider text-white my-3">
+          <div class="text-subtitle-1 text-white">
+            {{ formatAuthors(item.attributes?.authors) }}
+          </div> 
         </div>
       </v-carousel-item>
       <!-- <v-carousel-item
@@ -422,6 +434,30 @@ onMounted(async () => {
 .data-browser {
   background-image: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);
   /* background-image: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%); */
+}
+
+.gradient-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(33, 33, 33, 0.35) 0%,
+    rgb(33, 33, 33, 0.45) 100% 
+  );
+}
+
+.carousel-content {
+  z-index: 99;
+  position: relative;
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.carousel-divider {
+  width: 80%;
 }
 
 .contact-form {
