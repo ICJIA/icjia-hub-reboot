@@ -216,7 +216,6 @@ const victimsDataComputed = computed(() => {
     }
   }
   return data
-
 })
 
 const otherDataComputed = computed(() => {
@@ -346,7 +345,7 @@ onMounted(async () => {
   <v-container fluid class="header pa-15">
     <div>
       <h1>Data Browser</h1>
-      <p class="mt-4">Browse aggregate-level data contributed by ICJIA research participants. Data are derived from multiple data sources. To protect participant privacy, we have removed personal identifiers, and only included summary demographic information. Individual-level data are available for analysis upon further request</p>
+      <p class="mt-4">Browse aggregate-level data contributed by ICJIA research participants. Data are derived from multiple data sources. To protect participant privacy, we have removed personal identifiers, and only included summary demographic information. Individual-level data are available for analysis upon further request.</p>
     </div>    
   </v-container>
   <v-container fluid class="d-flex pa-15 justify-space-between">

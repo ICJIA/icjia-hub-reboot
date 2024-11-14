@@ -37,7 +37,7 @@ const navItems = {
   },
   data: {
     path: '/data',
-    title: 'Data Browser'    
+    title: 'Data & Publications Browser'    
     // title: 'Data & Tools',
     // items: [
     //   {
@@ -58,23 +58,23 @@ const navItems = {
     //   }
     // ]
   },
-  publications: {
-    path: '/publications',
-    title: 'Publications Browser',
-    items: [
-      {
-        path: '/articles',
-        title: 'Articles'
-      },
-      {
-        path: '/reports',
-        title: 'Reports'
-      },
-      {
-        path: '/apps',
-        title: 'Web Applications'
-      }
-    ]
+  archive: {
+    path: '/archive',
+    title: 'Archive',
+    // items: [
+    //   {
+    //     path: '/articles',
+    //     title: 'Articles'
+    //   },
+    //   {
+    //     path: '/reports',
+    //     title: 'Reports'
+    //   },
+    //   {
+    //     path: '/charts',
+    //     title: 'Interactive Charts'
+    //   }
+    // ]
   },
   irb: {
     path: '/irb',
