@@ -11,12 +11,6 @@ const keyword = ref('')
 
 const groupBy = ref('sector')
 
-const currentSectorTag = ref('')
-const sectorTags = ref(['Law enforcement', 'Courts', 'Community corrections', 'Prisons'])
-
-const currentKeywordTag = ref('')
-const keywordTags = ref(['Crime rate', 'Juvenile', 'Chicago', 'Cook County', 'Adams County', 'Race', 'Ethnicity'])
-
 const searchHint = ref('Data includes 409,420 participants as of 2/15/2023.')
 
 const panels = ref([])
@@ -350,102 +344,11 @@ onMounted(async () => {
 <template>
   <v-container fluid class="header pa-15">
     <div>
-      <h1>R&A Data Browser and Publication Browser</h1>
-      <p class="mt-4">Welcome to the R&A Data and Publication Browser. Use the browser to search for R&A publications, dashboards, and datasets from {{ '2/15/1990' }} to present. We offer the following search options.</p>
-    </div>
+      <h1>Data Browser</h1>
+      <p class="mt-4">Browse aggregate-level data contributed by ICJIA research participants. Data are derived from multiple data sources. To protect participant privacy, we have removed personal identifiers, and only included summary demographic information. Individual-level data are available for analysis upon further request.</p>
+    </div>    
   </v-container>
-  <v-container fluid class="search-info pa-15 d-flex">
-    <v-card
-      variant="outlined"
-      class="mx-auto pa-5 text-center"
-      max-width="344"
-    >
-      <div>
-        <v-chip>
-          1
-        </v-chip>
-        <h6 class="text-h6 my-2">
-          Search by justice system sector.
-        </h6>
-        <span class="text-subtitle-2">
-          Click below to learn about R&A's participation in the national Justice Counts initiative and data currently available by sector
-        </span>
-        <v-img
-          height="100%"
-          src="../../assets/imgs/Justice-Counts.png"
-          cover
-          width="100%"
-          class="mt-4 cursor-pointer"
-          @click=""
-        ></v-img>
-      </div>
-    </v-card>
-    <v-card
-      elevation="10"
-      class="mx-auto pa-5 text-center"
-      max-width="344"
-    >
-    <div>
-      <v-chip>
-        2
-      </v-chip>
-      <h6 class="text-h6 my-2">
-        Search by keyword.
-      </h6>
-      <span class="text-subtitle-2">
-        Use our keyword options or enter custom keywords.
-      </span>
-      <v-img
-        height="80"
-        src="../../assets/imgs/Search.png" 
-        class="mt-4 cursor-pointer"
-        @click=""
-      ></v-img>      
-    </div>
-    </v-card>
-  </v-container>
-
-  <v-container fluid class="px-15 pt-15">
-    <v-card
-      max-width="100%"
-      variant="flat"
-    >
-      <v-card-text class="px-0">
-        <h2 class="text-h6 mb-2">Use our keyword search tags or enter a search term.</h2>
-
-        <v-chip-group
-          v-model="currentSectorTag"
-          column
-        > 
-          <v-chip
-            v-for="sector in sectorTags"
-            :key="sector"
-            :text="sector"
-            variant="outlined"
-            filter
-          ></v-chip>
-        </v-chip-group>
-      </v-card-text>
-
-      <v-card-text class="px-0">
-        <h2 class="text-h6 mb-2">View publications, dashboards and datasets by justice system sector.</h2>
-
-        <v-chip-group
-          v-model="currentKeywordTag"
-          column          
-        >
-          <v-chip
-            v-for="tag in keywordTags"
-            :key="tag"
-            :text="tag"
-            variant="outlined"
-            filter
-          ></v-chip>      
-        </v-chip-group>
-      </v-card-text>
-    </v-card>
-  </v-container>
-  <v-container fluid class="d-flex px-15 pb-15 justify-space-between">
+  <v-container fluid class="d-flex pa-15 justify-space-between">
     <v-text-field 
       v-model=keyword 
       variant="outlined" 
@@ -460,11 +363,11 @@ onMounted(async () => {
         </span>
       </template>
     </v-text-field>
-    <!-- <div class="wrap-faq">
+    <div class="wrap-faq">
       <v-btn size="x-large" variant="outlined" >
         FAQ
       </v-btn>   
-    </div> -->
+    </div>
   </v-container>
   <v-container fluid class="pa-15">
     <div class="d-flex justify-end">
@@ -513,9 +416,5 @@ onMounted(async () => {
 
 .wrap-faq {
   margin: 2px auto 0;  
-}
-
-.search-info-card {
-  text-align: center;
 }
 </style>
