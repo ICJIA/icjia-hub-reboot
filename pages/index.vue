@@ -422,7 +422,7 @@ onMounted(async () => {
   /* background: url('../assets/imgs/scott-graham-5fNmWej4tAA-unsplash.jpg'); */
   background-size: cover;
   margin-top: 72px;
-  min-height: 600px;
+  min-height: 500px;
   border-top: 12px solid var(--clr-primary);
   border-bottom: 12px solid var(--clr-primary);
 }
