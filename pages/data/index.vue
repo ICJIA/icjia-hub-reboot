@@ -4,12 +4,18 @@ import { useDatasetStore } from '@/stores/dataset'
 
 import CardPanel from '~/components/CardPanel.vue';
 
-
 const datasetStore = useDatasetStore()
 
 const keyword = ref('')
 
 const groupBy = ref('sector')
+
+const searchInputRef = ref(null)
+
+function scrollTo(view) { 
+  view.scrollIntoView({ behavior: 'smooth' }) 
+  view.focus()
+}
 
 const currentSectorTag = ref('')
 const sectorTags = ref(['Law enforcement', 'Courts', 'Community corrections', 'Prisons'])
@@ -399,7 +405,7 @@ onMounted(async () => {
         height="80"
         src="../../assets/imgs/Search.png" 
         class="mt-4 cursor-pointer"
-        @click=""
+        @click="scrollTo(searchInputRef)"
       ></v-img>      
     </div>
     </v-card>
@@ -453,6 +459,7 @@ onMounted(async () => {
       class="search-input" 
       :hint="searchHint"
       persistent-hint
+      ref="searchInputRef"
     >
       <template v-slot:label>
         <span>
