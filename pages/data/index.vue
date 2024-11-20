@@ -429,6 +429,7 @@ onMounted(async () => {
             :text="sector"
             variant="outlined"
             filter
+            label
           ></v-chip>
         </v-chip-group>
       </v-card-text>
