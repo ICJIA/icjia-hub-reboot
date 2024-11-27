@@ -1,8 +1,8 @@
 <!-- pages/articles/[slug].vue -->
 <template>
   <div>
-    <h1>Article Details</h1>
-    <p>Slug: {{ route.params.slug }}</p>
+    <!-- <h1>Article Details</h1>
+    <p>Slug: {{ route.params.slug }}</p> -->
     <vue-markdown-it :source="markdown" />
   </div>
 </template>
