@@ -35,8 +35,8 @@ const navItems = {
     //   { path: '/staff', title: 'Research Hub Staff' }
     // ]
   },
-  data: {
-    path: '/data',
+  browser: {
+    path: '/browser',
     title: 'Data & Publications Browser'    
     // title: 'Data & Tools',
     // items: [
@@ -80,7 +80,7 @@ const navItems = {
     path: '/irb',
     title: 'Institutional Review Board',
     items: [
-    {
+      {
         path: '/members',
         title: 'Members & Staff'
       },
@@ -97,6 +97,11 @@ const navItems = {
         title: 'Resources'
       }
     ]
+  },
+  articles: {
+    path: '/articles',
+    title: 'Articles',
+    dynamic: true
   }
 }
 
@@ -135,6 +140,10 @@ const showBreadcrumbs = computed(() => {
   return true
 })
 
+const slugToTitle = (slug: string) => {
+  return slug
+}
+
 const breadcrumbsComputed = computed(() => {
   const breadcrumbs = [{ title: 'Research Hub', disabled: false, href: '/' }]
 
@@ -146,13 +155,27 @@ const breadcrumbsComputed = computed(() => {
   }
   breadcrumbs.push(rootCrumb)
 
-  if (pathItems.value[1]) {
+  const isDynamicRoute = navItems[rootItem]?.dynamic === true
+
+  if (pathItems.value[1] && !isDynamicRoute) {
     const nestedItem =  navItems[rootItem].items.find(subItem => {
       if (subItem.path.includes(pathItems.value[1])) {
         return true
       }
       return false
     })
+    const nestedCrumb = {
+      title: nestedItem.title,
+      disabled: false,
+      href: rootCrumb.href + nestedItem.path
+    }
+    breadcrumbs.push(nestedCrumb)
+  } else if (pathItems.value[1] && isDynamicRoute) {
+    // console.log(route.params, 'route params')
+    const nestedItem = {
+      path: `/${pathItems.value[1]}`,
+      title: `${slugToTitle(pathItems.value[1])}`
+    }
     const nestedCrumb = {
       title: nestedItem.title,
       disabled: false,

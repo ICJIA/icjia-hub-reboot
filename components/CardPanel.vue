@@ -1,10 +1,16 @@
 <script setup>
+const router = useRouter()
 
 const props = defineProps({
   value: String,
   title: String,
   data: Object
 })
+
+const toEntry = (entry) => {
+  console.log('entry', entry)
+  router.push(`/articles/${entry.attributes.slug}`)
+}
 </script>
 
 <template>
@@ -17,7 +23,7 @@ const props = defineProps({
     <v-expansion-panel-text>
       <v-row class="py-5">
         <v-col col="12" sm="12" md="3" v-for="data in props.data">
-          <v-card variant="outlined">     
+          <v-card variant="outlined" class="cursor-pointer" @click="toEntry(data)">     
             <div>
               Categories: {{ data.attributes.categories }}
             </div>          
@@ -39,3 +45,7 @@ const props = defineProps({
     </v-expansion-panel-text>
   </v-expansion-panel>
 </template>
+
+<style scoped>
+
+</style>

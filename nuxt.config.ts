@@ -6,6 +6,8 @@ export default defineNuxtConfig({
     // baseURL: 'https://sudoris.github.io/icjia-hub-reboot/'
   },
 
+  // ssr: false,
+
   css: ['~/assets/css/main.css'],
   devtools: { enabled: true },
 

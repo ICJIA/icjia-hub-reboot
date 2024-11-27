@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { ref, onMounted, computed, watchEffect } from 'vue'
 import { useDatasetStore } from '@/stores/dataset'
+import { useArticleStore } from '@/stores/article'
 
 import CardPanel from '~/components/CardPanel.vue';
 
 const datasetStore = useDatasetStore()
+const articleStore = useArticleStore()
 
 const keyword = ref('')
 
@@ -28,38 +30,38 @@ const searchHint = ref('Data includes 409,420 participants as of 2/15/2023.')
 const panels = ref([])
 
 const lawEnforcementDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
 
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('law enforcement') && (keyword.value === '' || keyword.value === null)) {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('law enforcement') && keyword.value !== '' && keyword.value !== null) {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('law enforcement') && (keyword.value === '' || keyword.value === null)) {
+      data.push(article)
+    } else if (article.attributes.categories.includes('law enforcement') && keyword.value !== '' && keyword.value !== null) {
+      if (article.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
       // notes can be null
-      if (dataset.attributes.notes) {
-        for (const note of dataset.attributes.notes) {
-          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      if (article.attributes.notes) {
+        for (const note of article.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(article)
           continue
         }
       }
@@ -69,38 +71,38 @@ const lawEnforcementDataComputed = computed(() => {
 })
 
 const correctionsDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
 
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('corrections') && (keyword.value === '' || keyword.value === null)) {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('corrections') && keyword.value !== '' && keyword.value !== null) {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('corrections') && (keyword.value === '' || keyword.value === null)) {
+      data.push(article)
+    } else if (article.attributes.categories.includes('corrections') && keyword.value !== '' && keyword.value !== null) {
+      if (article.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
       // notes can be null
-      if (dataset.attributes.notes) {
-        for (const note of dataset.attributes.notes) {
-          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      if (article.attributes.notes) {
+        for (const note of article.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(article)
           continue
         }
       }
@@ -110,37 +112,37 @@ const correctionsDataComputed = computed(() => {
 })
 
 const courtsDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('courts') && (keyword.value === '' || keyword.value === null)) {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('courts') && keyword.value !== '' && keyword.value !== null) {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('courts') && (keyword.value === '' || keyword.value === null)) {
+      data.push(article)
+    } else if (article.attributes.categories.includes('courts') && keyword.value !== '' && keyword.value !== null) {
+      if (article.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
       // notes can be null
-      if (dataset.attributes.notes) {
-        for (const note of dataset.attributes.notes) {
-          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      if (article.attributes.notes) {
+        for (const note of article.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(article)
           continue
         }
       }
@@ -150,37 +152,37 @@ const courtsDataComputed = computed(() => {
 })
 
 const crimesDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('crimes') && (keyword.value === '' || keyword.value === null)) {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('crimes') && keyword.value !== '' && keyword.value !== null) {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('crimes') && (keyword.value === '' || keyword.value === null)) {
+      data.push(article)
+    } else if (article.attributes.categories.includes('crimes') && keyword.value !== '' && keyword.value !== null) {
+      if (article.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
       // notes can be null
-      if (dataset.attributes.notes) {
-        for (const note of dataset.attributes.notes) {
-          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      if (article.attributes.notes) {
+        for (const note of article.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(article)
           continue
         }
       }
@@ -191,37 +193,37 @@ const crimesDataComputed = computed(() => {
 })
 
 const victimsDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []
+  if (!articleStore.articles.length) return []
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('victims') && (keyword.value === '' || keyword.value === null)) {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('victims') && keyword.value !== '' && keyword.value !== null) {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('victims') && (keyword.value === '' || keyword.value === null)) {
+      data.push(article)
+    } else if (article.attributes.categories.includes('victims') && keyword.value !== '' && keyword.value !== null) {
+      if (article.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
       // notes can be null
-      if (dataset.attributes.notes) {
-        for (const note of dataset.attributes.notes) {
-          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      if (article.attributes.notes) {
+        for (const note of article.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(article)
           continue
         }
       }
@@ -231,37 +233,37 @@ const victimsDataComputed = computed(() => {
 })
 
 const otherDataComputed = computed(() => {
-  if (!datasetStore.datasets.length) return []  
+  if (!articleStore.articles.length) return []  
 
   const data = []
-  for (const dataset of datasetStore.datasets) {
-    if (dataset.attributes.categories.includes('other') && (keyword.value === '' || keyword.value === null)) {
-      data.push(dataset)
-    } else if (dataset.attributes.categories.includes('other') && keyword.value !== '') {
-      if (dataset.attributes.description.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+  for (const article of articleStore.articles) {
+    if (article.attributes.categories.includes('other') && (keyword.value === '' || keyword.value === null)) {
+      data.push(article)
+    } else if (article.attributes.categories.includes('other') && keyword.value !== '') {
+      if (article.attributes.description.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.date.includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.date.includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      if (dataset.attributes.title.toLowerCase().includes(keyword.value)) {
-        data.push(dataset)
+      if (article.attributes.title.toLowerCase().includes(keyword.value)) {
+        data.push(article)
         continue
       }
-      for (const category of dataset.attributes.categories) {
-        if (category.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const category of article.attributes.categories) {
+        if (category.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
-      for (const tag of dataset.attributes.tags) {
-        if (tag.toLowerCase().includes(keyword.value)) data.push(dataset)
+      for (const tag of article.attributes.tags) {
+        if (tag.toLowerCase().includes(keyword.value)) data.push(article)
         continue
       }
       // notes can be null
-      if (dataset.attributes.notes) {
-        for (const note of dataset.attributes.notes) {
-          if (note.toLowerCase().includes(keyword.value)) data.push(dataset)
+      if (article.attributes.notes) {
+        for (const note of article.attributes.notes) {
+          if (note.toLowerCase().includes(keyword.value)) data.push(article)
           continue
         }
       }
@@ -345,7 +347,7 @@ watchEffect(async () => {
 })
 
 onMounted(async () => {
-  await datasetStore.loadDatasets()
+  await articleStore.loadArticles()
   // opens all panels on mount
   // panels.value = ['lawEnforcement', 'corrections', 'courts', 'crimes', 'victims', 'other']
   // opens law enforcement panel on mount
@@ -357,7 +359,7 @@ onMounted(async () => {
   <v-container fluid class="header pa-15">
     <div>
       <h1>R&A Data Browser and Publication Browser</h1>
-      <p class="mt-4">Welcome to the R&A Data and Publication Browser. Use the browser to search for R&A publications, dashboards, and datasets from {{ '2/15/1990' }} to present. We offer the following search options.</p>
+      <p class="mt-4">Welcome to the R&A Data and Publication Browser. Use the browser to search for R&A publications, dashboards, and articles from {{ '2/15/1990' }} to present. We offer the following search options.</p>
     </div>
   </v-container>
   <v-container fluid class="search-info pa-15 d-flex">
@@ -435,7 +437,7 @@ onMounted(async () => {
       </v-card-text>
 
       <v-card-text class="px-0">
-        <h2 class="text-h6 mb-2">View publications, dashboards and datasets by justice system sector.</h2>
+        <h2 class="text-h6 mb-2">View publications, dashboards and articles by justice system sector.</h2>
 
         <v-chip-group
           v-model="currentKeywordTag"
@@ -476,7 +478,7 @@ onMounted(async () => {
   </v-container>
   <v-container fluid class="pa-15">
     <div class="d-flex justify-end">
-      <v-btn-toggle
+      <!-- <v-btn-toggle
         v-model="groupBy"
         color="blue-grey-darken-4"
         variant="outlined"
@@ -487,6 +489,21 @@ onMounted(async () => {
         <v-btn value="year">
           Year
         </v-btn>
+        <v-btn value="list">
+          <v-icon icon="mdi-format-list-checkbox" size="large"></v-icon>
+        </v-btn>
+      </v-btn-toggle> -->
+      <v-btn-toggle
+        v-model="groupBy"
+        color="blue-grey-darken-4"
+        variant="outlined"
+      >
+        <v-btn value="sector">
+          <v-icon icon="mdi-dots-grid" size="large"></v-icon>
+        </v-btn>
+        <!-- <v-btn value="sector">
+          Sector
+        </v-btn> -->
         <v-btn value="list">
           <v-icon icon="mdi-format-list-checkbox" size="large"></v-icon>
         </v-btn>
