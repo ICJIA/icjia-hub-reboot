@@ -4,11 +4,13 @@ import { resolve } from 'path'
 export default defineNuxtConfig({
   app: {
     // baseURL: 'https://sudoris.github.io/icjia-hub-reboot/'
+    baseURL: '/'
   },
 
   // ssr: false,
 
-  css: ['~/assets/css/main.css'],
+
+  css: ['~/assets/css/main.css', '~/assets/css/article.css'],
   devtools: { enabled: true },
 
   build: {

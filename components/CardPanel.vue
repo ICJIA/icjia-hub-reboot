@@ -10,6 +10,8 @@ const props = defineProps({
 const toEntry = (entry) => {
   console.log('entry', entry)
   router.push(`/articles/${entry.attributes.slug}`)
+  // router.push({ path: `/articles/${entry.attributes.slug}` })
+  // router.push({ name: 'articles', params: { username: 'eduardo' } })
 }
 </script>
 
