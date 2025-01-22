@@ -16,7 +16,11 @@
     "axios": "^1.7.4",
     "dayjs": "^1.11.13",
     "linkify-it": "^5.0.0",
+    "markdown-it": "^14.1.0",
+    "markdown-it-anchor": "^9.2.0",
     "markdown-it-footnote": "^4.0.0",
+    "markdown-it-link-attributes": "^4.0.1",
+    "markdown-it-multimd-table": "^4.2.3",
     "nuxt": "^3.12.3",
     "vue": "latest"
   },
