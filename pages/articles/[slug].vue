@@ -43,11 +43,12 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import api from '@/api/index.js'
+import ArticleToc from '@/components/ArticleToc.vue'
 // import { VueMarkdownIt } from '@f3ve/vue-markdown-it'
 // import MarkdownIt from 'markdown-it'
 // import MarkdownItFootnote from 'markdown-it-footnote'
-import { format } from "@/utils/itemFormatter";
-import { createMarkdownUtils, initMarkdownIt } from "../../utils/markdownIt"
+import { format } from '@/utils/itemFormatter';
+import { createMarkdownUtils, initMarkdownIt } from '@/utils/markdownIt'
 
 // const options = {
 //   html: true,
