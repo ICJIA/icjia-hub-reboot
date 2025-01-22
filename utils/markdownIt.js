@@ -4,12 +4,18 @@ import markdownItAnchor from "markdown-it-anchor";
 import markdownItFootnote from "markdown-it-footnote";
 import markdownItLinkAttributes from "markdown-it-link-attributes";
 import markdownItMultimdTable from "markdown-it-multimd-table";
+import markdownItImplicitFigures from "markdown-it-implicit-figures";
+import markdownItAttrs from "markdown-it-attrs";
 
 // Markdown-it options
 const mdOpts = {
   html: true,
+  xhtmlOut: false,
+  breaks: false,
+  langPrefix: "language-",
   linkify: true,
   typographer: true,
+  quotes: "“”‘’",
 };
 
 // Markdown-it-anchor options
@@ -36,13 +42,28 @@ const mdMultimdTableOpts = {
   enableRowspan: true,
 };
 
+const mdAttrs = {
+  leftDelimiter: "{",
+  rightDelimiter: "}",
+  allowedAttributes: [],
+};
+
+const mdImplicitFigureOpts = {
+  dataType: false, // <figure data-type="image">, default: false
+  figcaption: false, // <figcaption>alternative text</figcaption>, default: false
+  tabindex: true, // <figure tabindex="1+n">..., default: false
+  link: false, // <a href="img.png"><img src="img.png"></a>, default: false
+};
+
 // Initialize MarkdownIt with plugins
 export const initMarkdownIt = () =>
   new MarkdownIt(mdOpts)
     .use(markdownItAnchor, mdAnchorOpts)
     .use(markdownItFootnote)
     .use(markdownItLinkAttributes, mdLinkAttrOpts)
-    .use(markdownItMultimdTable, mdMultimdTableOpts);
+    .use(markdownItMultimdTable, mdMultimdTableOpts)
+    .use(markdownItImplicitFigures, mdImplicitFigureOpts)
+    .use(markdownItAttrs, mdAttrs);
 
 // Create markdown utility functions
 export const createMarkdownUtils = (md) => ({

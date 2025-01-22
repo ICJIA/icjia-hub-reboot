@@ -30,11 +30,21 @@
           ref="main"
         ></div>
       </div>
-      <div class="meta">
-        <div class="toc my-5 ml-5 pa-5 d-flex justify-center">Table of Contents</div>
-        <div class="attachments my-5 ml-5 pa-5 d-flex justify-center">Attachments</div>
+      <!-- <div class="meta article-toc text-center" :class="{ 'article-toc-sticky': isTOCSticky }"> -->
+      <div class="meta article-toc text-center">
+
+        
+        <!-- <div class="toc my-5 ml-5 pa-5 d-flex justify-center">Table of Contents</div> -->
+        <ArticleToc
+          v-if="headings && headings.length"
+          v-scroll="onScrollTOC"
+          class="mb-12 text-left"
+          :headings="headings"
+          :active-heading="activeHeading"
+        />
+        <!-- <div class="attachments my-5 ml-5 pa-5 d-flex justify-center">Attachments</div>
         <div class="related my-5 ml-5 pa-5 d-flex justify-center">Related</div>
-        <div class="tags my-5 ml-5 pa-5 d-flex justify-center">Tags</div>
+        <div class="tags my-5 ml-5 pa-5 d-flex justify-center">Tags</div> -->
       </div>
     </v-container>
   </div>
@@ -42,6 +52,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
+import { useDisplay } from "vuetify";
 import api from '@/api/index.js'
 import ArticleToc from '@/components/ArticleToc.vue'
 // import { VueMarkdownIt } from '@f3ve/vue-markdown-it'
@@ -61,15 +72,12 @@ const md = initMarkdownIt();
 const markdownUtils = createMarkdownUtils(md);
 
 const route = useRoute()
+const { name } = useDisplay();
 
 const markdown = ref('')
 const article = ref()
-const articleFormatted = ref()
-// const articleAttributes = computed(() => {
-//   if (!article.value) return
-  
-//   return article.value.attributes
-// })
+
+const activeHeading = ref('introduction')
 
 const headings = computed(() => {
   if (!markdown.value) return null
@@ -79,17 +87,48 @@ const headings = computed(() => {
   return headings;
 })
 
+const splashHeight = computed(() => {
+  if (name.value === 'xs') {
+    return 240
+  } else if (name.value === 'sm') {
+    return 360
+  } else {
+    return 650
+  }
+});
+
+const viewTitleHeight = ref(60 + 80)
+
+const isTOCSticky = ref(false)
+
+const onScrollTOC = (e) => {
+  if (typeof window === "undefined") return;
+  const top = window.scrollY || e.target.scrollTop || 0;
+  const threshold = splashHeight.value + viewTitleHeight.value + 20;
+
+  isTOCSticky.value = top > threshold;
+}
+
 onMounted(async () => {
   // const testSlug = 'evaluation-of-youth-summer-job-program-suggests-targeting-at-risk-youth'
   article.value = await api.getArticle(route.params.slug)
   console.log(article.value)
+  article.value = format(article.value)
 
   // #TODO: add error handling
   // const article = await api.getArticle(testSlug)
-  markdown.value = markdownUtils.renderMarkdown(article.value.attributes.markdown)
+  // if (this.article.images) {
+  //         this.article.md = this.addImages(
+  //           this.article.images,
+  //           this.article.markdown
+  //         );
+  //       } else {
+  //         this.article.md = this.article.markdown;
+  //       }
+
+  markdown.value = markdownUtils.renderMarkdown(article.value.markdown)
 
   // gets rid of attributes layer and formats date and categories to make them more readable
-  article.value = format(article.value)
   console.log(article.value, 'formatted article')
 })
 </script>

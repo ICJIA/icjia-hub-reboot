@@ -194,6 +194,7 @@
 #article-view .article-toc-sticky {
   position: fixed;
   top: 50px;
+  /* right: 50px; */
 }
 @media screen and (max-width: 600px) {
   #article-view .article-content {
