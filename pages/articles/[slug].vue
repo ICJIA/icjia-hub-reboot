@@ -9,7 +9,8 @@
         width="100%"
       ></v-img>
     </v-container>
-    <v-container fluid class="article-container d-flex" :class="{ 'pa-0': smAndDown, 'pa-15': !smAndDown }">        
+    <!-- <v-container fluid class="article-container d-flex pa-15" :class="{ 'pa-0': smAndDown, 'pa-15': !smAndDown }">     -->
+    <v-container fluid class="article-container d-flex pa-15">       
       <div class="article-content">
         <div class="article-title">
           {{ article.title }}
@@ -31,15 +32,40 @@
         ></div>
       </div>
       <!-- <div class="meta article-toc text-center" :class="{ 'article-toc-sticky': isTOCSticky }"> -->
-      <div v-if="mdAndUp" class="meta article-toc text-center ml-10">        
+      <div v-if="mdAndUp" class="meta article-toc text-center ml-10">   
+        <div class="sticky">
+          <ArticleToc
+            v-if="headings && headings.length"
+            v-scroll="onScrollTOC"
+            class="mb-12 text-left sticky"
+            :headings="headings"
+            :active-heading="activeHeading"
+          />
+
+          <v-btn v-if="article.mainfile" variant="outlined">
+            {{ article.mainfiletype }}
+            <v-icon>download</v-icon>
+          </v-btn>
+
+          <!-- <v-btn
+            v-if="article.extrafile"
+            variant="outlined"            
+          >
+            <template>{{ "appendix" }}</template>
+            <v-icon>download</v-icon>
+          </v-btn> -->
+        </div>     
         <!-- <div class="toc my-5 ml-5 pa-5 d-flex justify-center">Table of Contents</div> -->
-        <ArticleToc
-          v-if="headings && headings.length"
-          v-scroll="onScrollTOC"
-          class="mb-12 text-left sticky"
-          :headings="headings"
-          :active-heading="activeHeading"
-        />
+
+
+        <!-- <v-btn
+          v-if="article.mainfile"
+          class="article-download"
+          @click="downloadHelper('main')"
+        >
+          <template>{{ article.mainfiletype }}</template>
+          <v-icon>download</v-icon>
+        </v-btn> -->
         <!-- <div class="attachments my-5 ml-5 pa-5 d-flex justify-center">Attachments</div>
         <div class="related my-5 ml-5 pa-5 d-flex justify-center">Related</div>
         <div class="tags my-5 ml-5 pa-5 d-flex justify-center">Tags</div> -->
