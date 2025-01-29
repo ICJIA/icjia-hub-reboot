@@ -44,7 +44,7 @@
 
           <v-btn v-if="article.mainFile" variant="outlined">
             {{ article.mainFile.type }}
-            <v-icon>download</v-icon>
+            <v-icon icon="mdi-download" />
           </v-btn>
 
           <!-- <v-btn
