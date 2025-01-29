@@ -42,8 +42,8 @@
             :active-heading="activeHeading"
           />
 
-          <v-btn v-if="article.mainfile" variant="outlined">
-            {{ article.mainfiletype }}
+          <v-btn v-if="article.mainFile" variant="outlined">
+            {{ article.mainFile.type }}
             <v-icon>download</v-icon>
           </v-btn>
 

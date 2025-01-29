@@ -6,7 +6,7 @@ const actions = {
   async getArticle (slug: string) {
     try {  
       // GET /api/:pluralApiId?filters[field][operator]=value
-      const response: AxiosResponse = await axios.get(`${baseUrl}/articles?filters[slug][$eq]=${slug}`)
+      const response: AxiosResponse = await axios.get(`${baseUrl}/articles?filters[slug][$eq]=${slug}&populate=*`)
       const { data } = response
       if (data && data?.data.length) {
         return data.data[0]
