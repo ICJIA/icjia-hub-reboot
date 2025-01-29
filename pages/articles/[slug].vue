@@ -9,7 +9,7 @@
         width="100%"
       ></v-img>
     </v-container>
-    <v-container fluid class="article-container pa-15 d-flex">        
+    <v-container fluid class="article-container d-flex" :class="{ 'pa-0': smAndDown, 'pa-15': !smAndDown }">        
       <div class="article-content">
         <div class="article-title">
           {{ article.title }}
@@ -31,14 +31,12 @@
         ></div>
       </div>
       <!-- <div class="meta article-toc text-center" :class="{ 'article-toc-sticky': isTOCSticky }"> -->
-      <div class="meta article-toc text-center">
-
-        
+      <div v-if="mdAndUp" class="meta article-toc text-center ml-10">        
         <!-- <div class="toc my-5 ml-5 pa-5 d-flex justify-center">Table of Contents</div> -->
         <ArticleToc
           v-if="headings && headings.length"
           v-scroll="onScrollTOC"
-          class="mb-12 text-left"
+          class="mb-12 text-left sticky"
           :headings="headings"
           :active-heading="activeHeading"
         />
@@ -72,7 +70,7 @@ const md = initMarkdownIt();
 const markdownUtils = createMarkdownUtils(md);
 
 const route = useRoute()
-const { name } = useDisplay();
+const { name, mdAndUp, smAndDown } = useDisplay();
 
 const markdown = ref('')
 const article = ref()
@@ -136,7 +134,26 @@ onMounted(async () => {
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Gentium+Book+Basic:ital@0;1&family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Oswald:wght@400;500;600;700&display=swap");
 
+.article-container {
+  max-width: 75%;
+}
+
 .article-body :deep(p) {
   margin-bottom: 16px;
+}
+
+.meta {
+  
+}
+
+.sticky {
+  position: sticky;
+  top: 200px;
+}
+
+@media screen and (max-width: 600px) {
+  .article-container {
+    max-width: 95%;
+  }
 }
 </style>

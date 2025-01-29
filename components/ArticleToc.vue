@@ -1,6 +1,6 @@
 <template>
   <div id="article-toc">
-    <h3 class="text-uppercase font-oswald mb-2" style="font-weight: 700">
+    <h3 class="text-uppercase font-oswald mb-2 pr-10" style="font-weight: 700">
       Table of contents
     </h3>
 
@@ -63,25 +63,25 @@ export default {
     };
 
     onMounted(() => {
-      const disclaimer = document.querySelector("#disclaimer");
-      const tocElement = toc.value;
+      // const disclaimer = document.querySelector("#disclaimer");
+      // const tocElement = toc.value;
 
-      if (disclaimer && tocElement) {
-        const observer = new IntersectionObserver(
-          ([entry]) => {
-            if (entry.isIntersecting) {
-              tocElement.classList.remove("article-toc-sticky");
-              return;
-            }
-            tocElement.classList.add("article-toc-sticky");
-          },
-          {
-            root: null,
-            threshold: 0,
-          }
-        );
-        observer.observe(disclaimer);
-      }
+      // if (disclaimer && tocElement) {
+      //   const observer = new IntersectionObserver(
+      //     ([entry]) => {
+      //       if (entry.isIntersecting) {
+      //         tocElement.classList.remove("article-toc-sticky");
+      //         return;
+      //       }
+      //       tocElement.classList.add("article-toc-sticky");
+      //     },
+      //     {
+      //       root: null,
+      //       threshold: 0,
+      //     }
+      //   );
+      //   observer.observe(disclaimer);
+      // }
     });
 
     return {
@@ -93,7 +93,5 @@ export default {
 </script>
 
 <style scoped>
-.article-toc-sticky {
-  position: fixed;
-}
+
 </style>
